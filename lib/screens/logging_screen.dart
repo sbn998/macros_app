@@ -270,21 +270,19 @@ Widget _buildList(
 }
 
 Widget _buildLogMealButton(WidgetRef ref, BuildContext context) {
-  return Center(
-    child: TextButton(
-      onPressed: () {
-        showAddMealDialog(
-          context,
-          ref,
-        );
-      },
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Log your meals!'),
-          Icon(Icons.add),
-        ],
-      ),
+  return TextButton(
+    onPressed: () {
+      showAddMealDialog(
+        context,
+        ref,
+      );
+    },
+    child: const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Log your meals!'),
+        Icon(Icons.add),
+      ],
     ),
   );
 }

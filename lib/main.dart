@@ -1,12 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:device_preview/device_preview.dart';
 
 import 'package:macros_app/screens/home_screen.dart';
-import 'package:macros_app/themes/light_theme.dart';
-import 'package:macros_app/themes/dark_theme.dart';
+// import 'package:macros_app/themes/light_theme.dart';
+// import 'package:macros_app/themes/dark_theme.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const ProviderScope(child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       title: 'FitLogger',

@@ -10,12 +10,10 @@ import 'package:macros_app/providers/logged_meals_provider.dart';
 
 class LoggedMealWidget extends ConsumerStatefulWidget {
   final LoggedMeal loggedMeal;
-  final void Function(LoggedFood) onDragFood;
 
   const LoggedMealWidget({
     super.key,
     required this.loggedMeal,
-    required this.onDragFood,
   });
 
   @override

@@ -258,9 +258,6 @@ Widget _buildList(
               key:
                   Key(ref.read(selectedDateProvider.notifier).state.toString()),
               loggedMeal: loggedMealsList[index],
-              onDragFood: (food) {
-                // loggedMealsList[index].loggedFood.remove(food);
-              },
             );
           },
         );

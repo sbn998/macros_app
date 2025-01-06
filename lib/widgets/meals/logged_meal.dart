@@ -24,7 +24,6 @@ class LoggedMealWidget extends ConsumerStatefulWidget {
 class _LoggedMealWidgetState extends ConsumerState<LoggedMealWidget> {
   final Map<String, TextEditingController> _quantityControllers = {};
   final Map<String, FocusNode> _focusNodes = {};
-  final String _testt = '';
 
   @override
   void initState() {

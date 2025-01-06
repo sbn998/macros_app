@@ -7,6 +7,7 @@ import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/providers/logged_meal_list_provider.dart';
 import 'package:macros_app/providers/logged_meals_provider.dart';
+import 'package:macros_app/functions/macros_strings.dart';
 
 class LoggedMealWidget extends ConsumerStatefulWidget {
   final LoggedMeal loggedMeal;
@@ -23,6 +24,7 @@ class LoggedMealWidget extends ConsumerStatefulWidget {
 class _LoggedMealWidgetState extends ConsumerState<LoggedMealWidget> {
   final Map<String, TextEditingController> _quantityControllers = {};
   final Map<String, FocusNode> _focusNodes = {};
+  final String _testt = '';
 
   @override
   void initState() {
@@ -302,7 +304,7 @@ class _LoggedMealWidgetState extends ConsumerState<LoggedMealWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
-            '${totalMacros['kcal']} kCal   ${totalMacros['protein']} P   ${totalMacros['carbs']} C   ${totalMacros['fats']} F',
+            getMacrosStringFromMap(totalMacros),
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.titleSmall,
           ),

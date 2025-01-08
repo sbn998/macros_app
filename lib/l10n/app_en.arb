@@ -52,6 +52,13 @@
   "date_today": "Today",
   "date_tomorrow": "Tomorrow",
   "date_yesterday": "Yesterday",
+  "days_shortest_monday": "M",
+  "days_shortest_tuesday": "Tu",
+  "days_shortest_wednesday": "W",
+  "days_shortest_thursday": "Th",
+  "days_shortest_friday": "F",
+  "days_shortest_saturday": "S",
+  "days_shortest_sunday": "U",
 
   "@note": {
     "description": "Translations for screen titles"
@@ -77,15 +84,4 @@
   "short_food_name": "Name must be at least 3 characters long."
   "long_food_name": "Name must be shorter than 40 characters.",
   "invalid_double": "Please enter a valid number."
-
-  "@note": {
-    "description": "Days translations for both long and shortened versions"
-  }
-  "days_shortest_monday": "M",
-  "days_shortest_tuesday": "Tu",
-  "days_shortest_wednesday": "W",
-  "days_shortest_thursday": "Th",
-  "days_shortest_friday": "F",
-  "days_shortest_saturday": "S",
-  "days_shortest_sunday": "U",
 }

@@ -12,7 +12,7 @@
   "add_food_exclamation": "Add food!"
   "food_screen": "This is the Food screen",
   "error": "Error",
-  "no_goals": "No goals",
+  "no_goals": "No goals for the day",
   "total_summary": "Total:       ",
   "enter_meal_name": "Enter a meal name",
   "add_meal": "Add a meal",
@@ -67,7 +67,7 @@
   "carbs": "Carbohydrates"
   "fats": "Fats",
   "serving_quantity": "Serving Quantity",
-  "serving_name": "Serging Name"
+  "serving_name": "Serving Name"
 
   "@note": {
     "description": "Validator messages section."

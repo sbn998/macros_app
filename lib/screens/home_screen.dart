@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:table_calendar/table_calendar.dart';
 
+import 'package:macros_app/constants/durations.dart';
 import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/screens/food_screen.dart';
 import 'package:macros_app/screens/logging_screen.dart';
 import 'package:macros_app/screens/settings_screen.dart';
 import 'package:macros_app/dialogs/show_calendar.dart';
 
-// TODO: Implement the widgets for the rest of the screen to show the data.
-// Implement database to save settings.
-
-bool _isSameDate(DateTime date1, DateTime date2) {
-  return date1.year == date2.year &&
-      date1.month == date2.month &&
-      date1.day == date2.day;
-}
+// TODO: Implement database to save settings.
 
 class HomeScreen extends ConsumerStatefulWidget {
   @override
@@ -77,12 +72,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   String _formatDate(DateTime selectedDate) {
     final today = DateTime.now();
-    if (_isSameDate(today, selectedDate)) {
+    if (isSameDay(today, selectedDate)) {
       return AppLocalizations.of(context)!.dateToday;
-    } else if (_isSameDate(
-        today.subtract(const Duration(days: 1)), selectedDate)) {
+    } else if (isSameDay(today.subtract(kOneDayDuration), selectedDate)) {
       return AppLocalizations.of(context)!.dateYesterday;
-    } else if (_isSameDate(today.add(const Duration(days: 1)), selectedDate)) {
+    } else if (isSameDay(today.add(kOneDayDuration), selectedDate)) {
       return AppLocalizations.of(context)!.dateTomorrow;
     } else {
       // Formats as 'January 1'.

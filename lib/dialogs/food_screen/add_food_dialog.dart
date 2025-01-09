@@ -271,37 +271,17 @@ dynamic _validateMacrosForm(String? valueToValidate) {
   return null;
 }
 
-Food _createFood(
-  String foodName,
-  double? calories,
-  double? protein,
-  double? carbs,
-  double? fats,
-  String? serving,
-  double? servingQuantity,
-) {
-  return Food(
-    foodName: foodName,
-    calories: calories,
-    protein: protein,
-    carbs: carbs,
-    fats: fats,
-    serving: serving,
-    servingQuantity: servingQuantity,
-  );
-}
-
 void _saveFood(BuildContext context) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
-    Food newFood = _createFood(
-      _foodName,
-      _calories,
-      _protein,
-      _carbs,
-      _fats,
-      _serving,
-      _servingQuantity,
+    Food newFood = Food(
+      foodName: _foodName,
+      calories: _calories,
+      protein: _protein,
+      carbs: _carbs,
+      fats: _fats,
+      serving: _serving,
+      servingQuantity: _servingQuantity,
     );
     _callbackFunction(newFood);
     Navigator.of(context).pop();

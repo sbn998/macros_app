@@ -7,7 +7,7 @@ import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/screens/food_screen.dart';
 import 'package:macros_app/screens/logging_screen.dart';
 import 'package:macros_app/screens/settings_screen.dart';
-import 'package:macros_app/widgets/calendar.dart';
+import 'package:macros_app/dialogs/show_calendar.dart';
 
 // TODO: Implement the widgets for the rest of the screen to show the data.
 // Implement database to save settings.
@@ -83,7 +83,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         today.subtract(const Duration(days: 1)), selectedDate)) {
       return AppLocalizations.of(context)!.dateYesterday;
     } else if (_isSameDate(today.add(const Duration(days: 1)), selectedDate)) {
-      return 'Tomorrow';
+      return AppLocalizations.of(context)!.dateTomorrow;
     } else {
       // Formats as 'January 1'.
       return DateFormat('MMMM d').format(selectedDate);

@@ -11,6 +11,8 @@ import 'package:macros_app/screens/home_screen.dart';
 // import 'package:macros_app/themes/dark_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(DevicePreview(

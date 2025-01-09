@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
 import 'package:macros_app/databases/macro_goals_db.dart';
+import 'package:macros_app/functions/validators/validators.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
@@ -173,7 +174,7 @@ Widget _buildMacroGoalNameFormTextField() {
       label: Text(AppLocalizations.of(_context)!.macroGoalName),
     ),
     validator: (value) {
-      return _validateMacroGoalName(value!);
+      return validateNameString(_context, value!);
     },
     onSaved: (textFormFieldFoodName) {
       _macroGoalName = textFormFieldFoodName!;
@@ -191,48 +192,13 @@ Widget _buildMacrosFormTextField(
     decoration: InputDecoration(
       label: Text(macroName),
     ),
-    validator: (value) => _validateMacrosForm(value!),
+    validator: (value) => validateDoubleValue(_context, value!),
     onSaved: (textFormFieldValue) {
       if (textFormFieldValue != null && textFormFieldValue.isNotEmpty) {
         onSavedCallback(double.parse(textFormFieldValue));
       }
     },
   );
-}
-
-//TODO: extract this into a different file to reuse.
-dynamic _validateMacroGoalName(String? nameToValidate) {
-  if (nameToValidate == null || nameToValidate.isEmpty) {
-    return 'Please write a name.';
-  }
-
-  try {
-    if (nameToValidate.length <= 2) {
-      throw Exception('too_short');
-    }
-    if (nameToValidate.length > 20) {
-      throw Exception('too_long');
-    }
-  } catch (e) {
-    if (e.toString().contains('too_short')) {
-      return 'Name must be at least 3 characters long.';
-    }
-    if (e.toString().contains('too_long')) {
-      return 'Name must be shorter than 20 characters.';
-    }
-  }
-}
-
-//TODO: extract this into a different file to reuse.
-dynamic _validateMacrosForm(String? valueToValidate) {
-  if (valueToValidate != null && valueToValidate.isNotEmpty) {
-    try {
-      double.parse(valueToValidate);
-    } catch (e) {
-      return 'Please enter a valid number';
-    }
-  }
-  return null;
 }
 
 Widget _addGoalsButton(BuildContext context) {

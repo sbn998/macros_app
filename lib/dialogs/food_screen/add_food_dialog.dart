@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:macros_app/functions/validators/validators.dart';
 
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
@@ -117,7 +118,7 @@ Widget _buildFoodNameFormTextField() {
       label: Text(AppLocalizations.of(_context)!.foodName),
     ),
     validator: (value) {
-      return _validateFoodName(value!);
+      return validateNameString(_context, value!);
     },
     onSaved: (textFormFieldFoodName) {
       _foodName = textFormFieldFoodName!;
@@ -133,7 +134,7 @@ Widget _buildCaloriesFormTextField() {
       label: Text(AppLocalizations.of(_context)!.calories),
     ),
     validator: (value) {
-      return _validateMacrosForm(value!);
+      return validateDoubleValue(_context, value!);
     },
     onSaved: (textFormFieldCalories) {
       // TODO: Fix this and add a way for the calories to be autocalculated based on macros if the user doesn't
@@ -156,7 +157,7 @@ Widget _buildDynamicFormTextField(
         label: Text(macro),
       ),
       validator: (value) {
-        return _validateMacrosForm(value!);
+        return validateDoubleValue(_context, value!);
       },
       onSaved: (textFormFieldValue) {
         if (textFormFieldValue != null && textFormFieldValue.isNotEmpty) {
@@ -235,42 +236,6 @@ Widget _buildServingNameFormTextField() {
 //     },
 //   );
 // }
-
-dynamic _validateFoodName(String? nameToValidate) {
-  if (nameToValidate == null || nameToValidate.isEmpty) {
-    return AppLocalizations.of(_context)!.nullFoodName;
-  }
-
-  try {
-    if (nameToValidate.length <= 2) {
-      throw Exception('too_short');
-    }
-    if (nameToValidate.length > 20) {
-      throw Exception('too_long');
-    }
-  } catch (e) {
-    if (e.toString().contains('too_short')) {
-      return AppLocalizations.of(_context)!.shortFoodName;
-    }
-    if (e.toString().contains('too_long')) {
-      return AppLocalizations.of(_context)!.longFoodName;
-    }
-  }
-
-  return null;
-}
-
-dynamic _validateMacrosForm(String? valueToValidate) {
-  if (valueToValidate != null && valueToValidate.isNotEmpty) {
-    try {
-      double.parse(valueToValidate);
-    } catch (e) {
-      return AppLocalizations.of(_context)!.invalidDouble;
-    }
-  }
-  return null;
-}
-
 void _saveFood(BuildContext context) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();

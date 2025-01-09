@@ -8,7 +8,7 @@ import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/providers/logged_meal_list_provider.dart';
 import 'package:macros_app/providers/logged_meals_provider.dart';
-import 'package:macros_app/functions/macros_strings.dart';
+import 'package:macros_app/functions/macros_summary.dart';
 
 class LoggedMealWidget extends ConsumerStatefulWidget {
   final LoggedMeal loggedMeal;
@@ -304,7 +304,7 @@ class _LoggedMealWidgetState extends ConsumerState<LoggedMealWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
-            getMacrosStringFromMap(totalMacros),
+            getMacrosSummary(totalMacros),
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.titleSmall,
           ),

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-String shortestDayStringFromInt(BuildContext context, int i) {
-  switch (i) {
+String shortestDay(BuildContext context, int index) {
+  final AppLocalizations translation = AppLocalizations.of(context)!;
+
+  switch (index) {
     case 0:
-      return AppLocalizations.of(context)!.daysShortestMonday;
+      return translation.daysShortestMonday;
     case 1:
-      return AppLocalizations.of(context)!.daysShortestTuesday;
+      return translation.daysShortestTuesday;
     case 2:
-      return AppLocalizations.of(context)!.daysShortestWednesday;
+      return translation.daysShortestWednesday;
     case 3:
-      return AppLocalizations.of(context)!.daysShortestThursday;
+      return translation.daysShortestThursday;
     case 4:
-      return AppLocalizations.of(context)!.daysShortestFriday;
+      return translation.daysShortestFriday;
     case 5:
-      return AppLocalizations.of(context)!.daysShortestSaturday;
+      return translation.daysShortestSaturday;
     case 6:
-      return AppLocalizations.of(context)!.daysShortestSunday;
+      return translation.daysShortestSunday;
     default:
       return '';
   }

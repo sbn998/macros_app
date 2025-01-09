@@ -46,8 +46,7 @@ class _MacroGoalsDaySelectorState extends State<MacroGoalsDaySelector> {
               },
               child: Row(
                 children: [
-                  Text(shortestDayStringFromInt(
-                      context, kWeekdays.indexOf(day))),
+                  Text(shortestDay(context, kWeekdays.indexOf(day))),
                   const SizedBox(
                     width: 1,
                   ),

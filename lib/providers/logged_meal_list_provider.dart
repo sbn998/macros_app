@@ -21,27 +21,6 @@ class LoggedMealNotifier extends StateNotifier<LoggedMeal> {
       loggedUserMeal: state.loggedUserMeal,
     );
   }
-
-  Map<String, double> calculateMacros() {
-    double kcal = 0.0;
-    double protein = 0.0;
-    double carbs = 0.0;
-    double fats = 0.0;
-
-    for (var food in state.loggedFood) {
-      kcal += food.loggedQuantity * 4; // Assuming 4 kcal per gram of food
-      protein += food.loggedQuantity * 0.25; // Example value
-      carbs += food.loggedQuantity * 0.5; // Example value
-      fats += food.loggedQuantity * 0.2; // Example value
-    }
-
-    return {
-      'kcal': kcal,
-      'protein': protein,
-      'carbs': carbs,
-      'fats': fats,
-    };
-  }
 }
 
 final loggedMealProviderFamily =

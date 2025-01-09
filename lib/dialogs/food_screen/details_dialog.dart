@@ -3,7 +3,7 @@ import 'package:macros_app/databases/food_db.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/models/food_model.dart';
-import 'package:path/path.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 
 //TODO: Add some graphics to show the macros visually.
 
@@ -222,14 +222,7 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.end,
     children: _isEditing
         ? [
-            TextButton(
-                onPressed: () {
-                  _setState(() => _isEditing = false);
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  AppLocalizations.of(_context)!.buttonsClose,
-                )),
+            const CloseButtonWidget(),
             const SizedBox(
               width: 12,
             ),
@@ -248,11 +241,7 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
                     Text(AppLocalizations.of(_context)!.buttonsConfirmChanges)),
           ]
         : [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(AppLocalizations.of(_context)!.buttonsClose)),
+            const CloseButtonWidget(),
           ],
   );
 }

@@ -11,6 +11,7 @@ import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/models/user_meal_model.dart';
 import 'package:macros_app/widgets/add_food/food_selection.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 
 bool _isMealSelected = false;
 List<UserMeal> _userMeals = [];
@@ -96,12 +97,7 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
           right: 38.0,
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(AppLocalizations.of(context)!.buttonsClose),
-          ),
+          const CloseButtonWidget(),
           if (_isMealSelected)
             ElevatedButton(
               onPressed: () async {

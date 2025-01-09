@@ -6,6 +6,7 @@ import 'package:macros_app/databases/daily_macro_goals_db.dart';
 import 'package:macros_app/databases/macro_goals_db.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/settings/macro_goals_day_selector.dart';
 import 'package:macros_app/widgets/settings/macro_goals_list.dart';
 
@@ -266,11 +267,10 @@ Widget _buildButtonsRow(BuildContext context) {
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: _mode == 'normal'
-                ? Text(AppLocalizations.of(_context)!.buttonsClose)
-                : Text(AppLocalizations.of(_context)!.buttonsCancel),
+          CloseButtonWidget(
+            buttonText: _mode == 'normal'
+                ? AppLocalizations.of(_context)!.buttonsClose
+                : AppLocalizations.of(_context)!.buttonsCancel,
           ),
           if (_mode != 'normal')
             TextButton(

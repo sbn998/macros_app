@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/models/food_model.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 String _foodName = '';
@@ -62,10 +63,7 @@ Widget _buildStatefulBuilderRow(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
-      TextButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Text(AppLocalizations.of(context)!.buttonsClose),
-      ),
+      const CloseButtonWidget(),
       TextButton(
         onPressed: () {
           _saveFood(context);
@@ -211,7 +209,6 @@ Widget _buildServingNameFormTextField() {
     ),
     validator: (value) {
       return value == null || value.isEmpty
-          //TODO: Change to use localizations.
           ? AppLocalizations.of(_context)!.nullServingName
           : null;
     },

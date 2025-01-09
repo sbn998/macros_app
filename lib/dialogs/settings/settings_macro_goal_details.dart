@@ -6,6 +6,7 @@ import 'package:macros_app/databases/daily_macro_goals_db.dart';
 import 'package:macros_app/databases/macro_goals_db.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/settings/macro_goals_day_selector.dart';
 
 bool _isEditing = false;
@@ -280,11 +281,7 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.end,
     children: _isEditing
         ? [
-            TextButton(
-                onPressed: () {
-                  _setState(() => _isEditing = false);
-                },
-                child: Text(AppLocalizations.of(context)!.buttonsClose)),
+            const CloseButtonWidget(),
             const SizedBox(
               width: 12,
             ),
@@ -303,11 +300,7 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
                     Text(AppLocalizations.of(context)!.buttonsConfirmChanges))
           ]
         : [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(AppLocalizations.of(context)!.buttonsClose)),
+            const CloseButtonWidget(),
           ],
   );
 }

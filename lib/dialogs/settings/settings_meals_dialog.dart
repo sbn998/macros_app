@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/user_meals_db.dart';
 import 'package:macros_app/models/user_meal_model.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/settings/user_meals_list.dart';
 
 Future<void> handleConfirmation(
@@ -69,10 +70,7 @@ Future<void> showUserMealsDialog(BuildContext context) async {
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(AppLocalizations.of(context)!.buttonsClose),
-            ),
+            const CloseButtonWidget(),
             TextButton(
               onPressed: () async {
                 await handleConfirmation(dbUserMeals, callbackList);

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:macros_app/databases/food_db.dart';
 import 'package:macros_app/dialogs/food_screen/add_food_dialog.dart';
 import 'package:macros_app/dialogs/food_screen/details_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/models/food_model.dart';
 
@@ -159,12 +160,12 @@ class _FoodScreenState extends State<FoodScreen> {
             onPressed: () {
               showAddFoodDialog(context, _addFood);
             },
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Add food!'),
-                Icon(Icons.add),
+                Text(AppLocalizations.of(context)!.buttonsAddFoodExclamation),
+                const Icon(Icons.add),
               ],
             ),
           ),
@@ -175,18 +176,18 @@ class _FoodScreenState extends State<FoodScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'This is the Food screen',
+          Text(
+            AppLocalizations.of(context)!.foodScreen,
           ),
           TextButton(
             onPressed: () {
               showAddFoodDialog(context, _addFood);
             },
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Start adding food!'),
-                Icon(Icons.add),
+                Text(AppLocalizations.of(context)!.buttonsStartAddingFood),
+                const Icon(Icons.add),
               ],
             ),
           ),

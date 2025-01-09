@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
 import 'package:macros_app/databases/macro_goals_db.dart';
@@ -115,7 +116,7 @@ Widget _buildSavedMacroGoalsColumn(BuildContext context) {
         height: 25,
       ),
       Text(
-        'Your macro goals',
+        AppLocalizations.of(context)!.yourMacroGoals,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -136,14 +137,14 @@ Widget _buildAddMacroGoalForm(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildMacroGoalNameFormTextField(),
-              _buildMacrosFormTextField(
-                  'Calories', _calories, (newValue) => _calories = newValue),
-              _buildMacrosFormTextField(
-                  'Protein', _protein, (newValue) => _protein = newValue),
-              _buildMacrosFormTextField(
-                  'Carbohydrates', _carbs, (newValue) => _carbs = newValue),
-              _buildMacrosFormTextField(
-                  'Fats', _fats, (newValue) => _fats = newValue),
+              _buildMacrosFormTextField(AppLocalizations.of(context)!.calories,
+                  _calories, (newValue) => _calories = newValue),
+              _buildMacrosFormTextField(AppLocalizations.of(context)!.protein,
+                  _protein, (newValue) => _protein = newValue),
+              _buildMacrosFormTextField(AppLocalizations.of(context)!.carbs,
+                  _carbs, (newValue) => _carbs = newValue),
+              _buildMacrosFormTextField(AppLocalizations.of(context)!.fats,
+                  _fats, (newValue) => _fats = newValue),
               const SizedBox(
                 height: 15,
               ),
@@ -164,8 +165,8 @@ Widget _buildAddMacroGoalForm(BuildContext context) {
 Widget _buildMacroGoalNameFormTextField() {
   return TextFormField(
     maxLength: 20,
-    decoration: const InputDecoration(
-      label: Text('Macro goal name'),
+    decoration: InputDecoration(
+      label: Text(AppLocalizations.of(_context)!.macroGoalName),
     ),
     validator: (value) {
       return _validateMacroGoalName(value!);
@@ -241,7 +242,7 @@ Widget _addGoalsButton(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Add a new goal',
+              AppLocalizations.of(_context)!.addNewGoal,
               style: TextStyle(
                   fontSize: 15.0, color: Theme.of(context).colorScheme.primary),
             ),
@@ -262,15 +263,16 @@ Widget _buildButtonsRow(BuildContext context) {
         children: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child:
-                _mode == 'normal' ? const Text('Close') : const Text('Cancel'),
+            child: _mode == 'normal'
+                ? Text(AppLocalizations.of(_context)!.buttonsClose)
+                : Text(AppLocalizations.of(_context)!.buttonsCancel),
           ),
           if (_mode != 'normal')
             TextButton(
               onPressed: () {
                 _saveMacroGoal();
               },
-              child: const Text('Confirm'),
+              child: Text(AppLocalizations.of(_context)!.buttonsConfirm),
             ),
         ],
       ),

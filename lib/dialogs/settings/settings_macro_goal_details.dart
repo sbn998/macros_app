@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
 import 'package:macros_app/databases/macro_goals_db.dart';
@@ -285,7 +286,7 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
                 onPressed: () {
                   _setState(() => _isEditing = false);
                 },
-                child: const Text('Cancel')),
+                child: Text(AppLocalizations.of(context)!.buttonsClose)),
             const SizedBox(
               width: 12,
             ),
@@ -300,14 +301,15 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.onSecondary),
-                child: const Text('Confirm changes'))
+                child:
+                    Text(AppLocalizations.of(context)!.buttonsConfirmChanges))
           ]
         : [
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Close'))
+                child: Text(AppLocalizations.of(context)!.buttonsClose)),
           ],
   );
 }

@@ -9,7 +9,6 @@
   "yourMacroGoals": "Tus macro-metas",
   "addNewGoal": "Añade una nueva meta",
   "addEditMeals": "Añade o Edita tus comidas",
-  "addFoodExclamation": "Añade alimentos!",
   "foodScreen": "Esta es la ventana de los Alimentos",
   "error": "Error",
   "noGoals": "No hay metas para el día",
@@ -45,6 +44,7 @@
   "buttonsStartAddingFood": "Empieza a añadir alimentos",
   "buttonsStartAddingGoal": "Empieza añadiendo una!",
   "buttonsLogMeal": "Apunta tus comidas!",
+  "buttonsAddFoodExclamation": "Añade alimentos!",
 
   "@note": {
     "description": "Traducciones relacionadas con las fechas."

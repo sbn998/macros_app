@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/models/food_model.dart';
 
@@ -41,7 +42,7 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Add some food',
+              AppLocalizations.of(context)!.addFood,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
@@ -63,13 +64,13 @@ Widget _buildStatefulBuilderRow(BuildContext context) {
     children: [
       TextButton(
         onPressed: () => Navigator.of(context).pop(),
-        child: const Text('Cancel'),
+        child: Text(AppLocalizations.of(context)!.buttonsClose),
       ),
       TextButton(
         onPressed: () {
           _saveFood(context);
         },
-        child: const Text('Confirm'),
+        child: Text(AppLocalizations.of(context)!.buttonsConfirm),
       ),
     ],
   );
@@ -85,23 +86,23 @@ Widget _buildForm(GlobalKey<FormState> formKey) {
           _buildFoodNameFormTextField(),
           _buildCaloriesFormTextField(),
           _buildDynamicFormTextField(
-            'Protein',
+            AppLocalizations.of(_context)!.protein,
             _protein,
             (newValue) => _protein = newValue,
           ),
           _buildDynamicFormTextField(
-            'Carbohydrates',
+            AppLocalizations.of(_context)!.carbs,
             _carbs,
             (newValue) => _carbs = newValue,
           ),
           _buildDynamicFormTextField(
-            'Fats',
+            AppLocalizations.of(_context)!.fats,
             _fats,
             (newValue) => _fats = newValue,
           ),
           _buildServingNameFormTextField(),
           _buildDynamicFormTextField(
-            'Serving Quantity',
+            AppLocalizations.of(_context)!.servingQuantity,
             _servingQuantity,
             (newValue) => _servingQuantity = newValue,
           ),
@@ -114,8 +115,8 @@ Widget _buildForm(GlobalKey<FormState> formKey) {
 Widget _buildFoodNameFormTextField() {
   return TextFormField(
     maxLength: 20,
-    decoration: const InputDecoration(
-      label: Text('Food name'),
+    decoration: InputDecoration(
+      label: Text(AppLocalizations.of(_context)!.foodName),
     ),
     validator: (value) {
       return _validateFoodName(value!);
@@ -130,8 +131,8 @@ Widget _buildFoodNameFormTextField() {
 Widget _buildCaloriesFormTextField() {
   return TextFormField(
     maxLength: 20,
-    decoration: const InputDecoration(
-      label: Text('Calories'),
+    decoration: InputDecoration(
+      label: Text(AppLocalizations.of(_context)!.calories),
     ),
     validator: (value) {
       return _validateMacrosForm(value!);
@@ -205,12 +206,13 @@ Widget _buildDynamicFormTextField(
 Widget _buildServingNameFormTextField() {
   return TextFormField(
     maxLength: 20,
-    decoration: const InputDecoration(
-      label: Text('Serving name'),
+    decoration: InputDecoration(
+      label: Text(AppLocalizations.of(_context)!.servingName),
     ),
     validator: (value) {
       return value == null || value.isEmpty
-          ? 'Please insert your serving unit(s)'
+          //TODO: Change to use localizations.
+          ? AppLocalizations.of(_context)!.nullServingName
           : null;
     },
     onSaved: (textFormFieldServingName) {
@@ -239,7 +241,7 @@ Widget _buildServingNameFormTextField() {
 
 dynamic _validateFoodName(String? nameToValidate) {
   if (nameToValidate == null || nameToValidate.isEmpty) {
-    return 'Please write a name.';
+    return AppLocalizations.of(_context)!.nullFoodName;
   }
 
   try {
@@ -251,10 +253,10 @@ dynamic _validateFoodName(String? nameToValidate) {
     }
   } catch (e) {
     if (e.toString().contains('too_short')) {
-      return 'Name must be at least 3 characters long.';
+      return AppLocalizations.of(_context)!.shortFoodName;
     }
     if (e.toString().contains('too_long')) {
-      return 'Name must be shorter than 20 characters.';
+      return AppLocalizations.of(_context)!.longFoodName;
     }
   }
 
@@ -266,7 +268,7 @@ dynamic _validateMacrosForm(String? valueToValidate) {
     try {
       double.parse(valueToValidate);
     } catch (e) {
-      return 'Please enter a valid number';
+      return AppLocalizations.of(_context)!.invalidDouble;
     }
   }
   return null;

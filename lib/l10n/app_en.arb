@@ -10,7 +10,6 @@
   "yourMacroGoals": "Your macro goals",
   "addNewGoal": "Add a new goal",
   "addEditMeals": "Add or Edit your meals",
-  "addFoodExclamation": "Add food!",
   "foodScreen": "This is the Food screen",
   "error": "Error",
   "noGoals": "No goals for the day",
@@ -46,6 +45,7 @@
   "buttonsStartAddingFood": "Start adding food!",
   "buttonsStartAddingGoal": "Start by adding one",
   "buttonsLogMeal": "Log your meals!",
+  "buttonsAddFoodExclamation": "Add food!",
 
   "@note": {
     "description": "Translations related to dates."

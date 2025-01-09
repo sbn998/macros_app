@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/dialogs/settings/settings_macro_goals_dialog.dart';
 import 'package:macros_app/dialogs/settings/settings_meals_dialog.dart';
@@ -44,14 +45,14 @@ Widget _buildListView(BuildContext context) {
         onTap: () {
           showUserMealsDialog(context);
         },
-        settingName: 'Add/Edit your meals',
+        settingName: AppLocalizations.of(context)!.settingsAddEditMeals,
         icon: Icons.edit,
       ),
       _buildInkWell(
         onTap: () {
           showMacroGoalsDialog(context, _ref);
         },
-        settingName: 'Add/Edit your macro goals',
+        settingName: AppLocalizations.of(context)!.settingsAddEditGoals,
         icon: Icons.edit,
       ),
     ],

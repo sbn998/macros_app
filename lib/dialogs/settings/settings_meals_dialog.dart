@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/user_meals_db.dart';
 import 'package:macros_app/models/user_meal_model.dart';
@@ -52,8 +53,8 @@ Future<void> showUserMealsDialog(BuildContext context) async {
     builder: (context) {
       return StatefulBuilder(builder: (context, setState) {
         return AlertDialog(
-          title: const Text(
-            'Add or Edit your meals',
+          title: Text(
+            AppLocalizations.of(context)!.settingsAddEditMeals,
             textAlign: TextAlign.center,
           ),
           content: SizedBox(
@@ -70,7 +71,7 @@ Future<void> showUserMealsDialog(BuildContext context) async {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.buttonsClose),
             ),
             TextButton(
               onPressed: () async {
@@ -78,7 +79,7 @@ Future<void> showUserMealsDialog(BuildContext context) async {
                 if (!context.mounted) return;
                 Navigator.of(context).pop();
               },
-              child: const Text('Confirm'),
+              child: Text(AppLocalizations.of(context)!.buttonsConfirm),
             ),
           ],
         );

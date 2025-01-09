@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:macros_app/databases/food_db.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/models/food_model.dart';
 import 'package:path/path.dart';
@@ -152,9 +153,9 @@ List<Widget> _buildStatefulBuilderDetailsMacrosRowContent(
   String properName = '';
 
   if (foodFieldName == 'carbs') {
-    properName = 'Carbohydrates';
+    properName = AppLocalizations.of(_context)!.carbs;
   } else if (foodFieldName == 'servingQuantity') {
-    properName = 'Serving Quantity';
+    properName = AppLocalizations.of(_context)!.servingQuantity;
   } else {
     properName = foodFieldName;
   }
@@ -226,7 +227,9 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
                   _setState(() => _isEditing = false);
                   Navigator.of(context).pop();
                 },
-                child: const Text('Cancel')),
+                child: Text(
+                  AppLocalizations.of(_context)!.buttonsClose,
+                )),
             const SizedBox(
               width: 12,
             ),
@@ -241,14 +244,15 @@ Widget _buildStatefulBuilderDetailsOverviewBottomButtons(BuildContext context) {
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.onSecondary),
-                child: const Text('Confirm changes'))
+                child:
+                    Text(AppLocalizations.of(_context)!.buttonsConfirmChanges)),
           ]
         : [
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Close'))
+                child: Text(AppLocalizations.of(_context)!.buttonsClose)),
           ],
   );
 }

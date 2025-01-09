@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/food_db.dart';
 import 'package:macros_app/providers/date_provider.dart';
@@ -72,8 +73,10 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
 
       return AlertDialog(
         title: _isMealSelected
-            ? const Text('Select your food', textAlign: TextAlign.center)
-            : const Text('Select your meal', textAlign: TextAlign.center),
+            ? Text(AppLocalizations.of(context)!.selectFood,
+                textAlign: TextAlign.center)
+            : Text(AppLocalizations.of(context)!.selectMeal,
+                textAlign: TextAlign.center),
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ConstrainedBox(
@@ -97,7 +100,7 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Close'),
+            child: Text(AppLocalizations.of(context)!.buttonsClose),
           ),
           if (_isMealSelected)
             ElevatedButton(
@@ -120,7 +123,7 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
 
                 Navigator.of(context).pop();
               },
-              child: const Text('Confirm'),
+              child: Text(AppLocalizations.of(context)!.buttonsConfirm),
             )
         ],
       );

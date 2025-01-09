@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/databases/food_db.dart';
 import 'package:macros_app/models/food_model.dart';
@@ -60,7 +61,7 @@ Future<void> _updateLoggedMeal(LoggedMeal loggedMeal) async {
 
 AlertDialog _buildAlertDialog(BuildContext context) {
   return AlertDialog(
-    title: const Text('Select your food'),
+    title: Text(AppLocalizations.of(context)!.selectFood),
     content: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ConstrainedBox(
@@ -82,7 +83,7 @@ AlertDialog _buildAlertDialog(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: const Text('Close'),
+        child: Text(AppLocalizations.of(context)!.buttonsClose),
       ),
       ElevatedButton(
         onPressed: () async {
@@ -98,7 +99,7 @@ AlertDialog _buildAlertDialog(BuildContext context) {
 
           Navigator.of(context).pop();
         },
-        child: const Text('Confirm'),
+        child: Text(AppLocalizations.of(context)!.buttonsConfirm),
       )
     ],
   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/screens/food_screen.dart';
@@ -77,10 +78,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   String _formatDate(DateTime selectedDate) {
     final today = DateTime.now();
     if (_isSameDate(today, selectedDate)) {
-      return 'Today';
+      return AppLocalizations.of(context)!.dateToday;
     } else if (_isSameDate(
         today.subtract(const Duration(days: 1)), selectedDate)) {
-      return 'Yesterday';
+      return AppLocalizations.of(context)!.dateYesterday;
     } else if (_isSameDate(today.add(const Duration(days: 1)), selectedDate)) {
       return 'Tomorrow';
     } else {
@@ -92,13 +93,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   String _setAppBarTitle(DateTime selectedDate) {
     switch (_selectedScreenIndex) {
       case 0:
-        return 'Your Food';
+        return AppLocalizations.of(context)!.screensYourFood;
       case 1:
         return _formatDate(selectedDate);
       case 2:
-        return 'Settings';
+        return AppLocalizations.of(context)!.screensSettings;
       default:
-        return 'Naaah';
+        return '';
     }
   }
 
@@ -125,11 +126,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return BottomNavigationBar(
       onTap: _changeScreen,
       currentIndex: _selectedScreenIndex,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.food_bank), label: 'Your Food'),
-        BottomNavigationBarItem(icon: Icon(Icons.note_add), label: 'Meals'),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+            icon: const Icon(Icons.food_bank),
+            label: AppLocalizations.of(context)!.labelsYourFood),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.note_add),
+            label: AppLocalizations.of(context)!.labelsMeals),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.settings),
+            label: AppLocalizations.of(context)!.labelsSettings),
       ],
     );
   }

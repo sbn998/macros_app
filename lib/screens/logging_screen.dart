@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/dialogs/logging_food/add_meal_dialog.dart';
 import 'package:macros_app/dialogs/settings/settings_macro_goals_dialog.dart';
@@ -72,7 +73,7 @@ class _LoggingScreenState extends ConsumerState<LoggingScreen> {
         return const CircularProgressIndicator();
       },
       error: (error, stack) {
-        return Text('Error: $error');
+        return Text('${AppLocalizations.of(_context)!.error}: $error');
       },
     );
   }
@@ -100,9 +101,9 @@ Widget _buildMacrosHeader(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'No goals',
-            style: TextStyle(fontSize: 15.0),
+          Text(
+            AppLocalizations.of(_context)!.noGoals,
+            style: const TextStyle(fontSize: 15.0),
           ),
           const SizedBox(
             height: 18,
@@ -116,7 +117,7 @@ Widget _buildMacrosHeader(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Start by adding one',
+                  AppLocalizations.of(_context)!.buttonsStartAddingGoal,
                   style: TextStyle(
                       fontSize: 15.0,
                       color: Theme.of(_context).colorScheme.primary),
@@ -153,7 +154,7 @@ Widget _buildMacrosOverview(
       children: [
         Column(
           children: [
-            const Text('Calories'),
+            Text(AppLocalizations.of(_context)!.calories),
             const SizedBox(height: 8),
             MacrosOverviewWidget(
               color: Colors.green,
@@ -167,7 +168,7 @@ Widget _buildMacrosOverview(
             const SizedBox(
               height: 30,
             ),
-            const Text('Protein'),
+            Text(AppLocalizations.of(_context)!.protein),
             const SizedBox(
               height: 8,
             ),
@@ -187,7 +188,7 @@ Widget _buildMacrosOverview(
         // ),
         Column(
           children: [
-            const Text('Carbs'),
+            Text(AppLocalizations.of(_context)!.carbs),
             const SizedBox(
               height: 8,
             ),
@@ -203,7 +204,7 @@ Widget _buildMacrosOverview(
             const SizedBox(
               height: 30,
             ),
-            const Text('Fats'),
+            Text(AppLocalizations.of(_context)!.fats),
             const SizedBox(
               height: 8,
             ),
@@ -274,11 +275,11 @@ Widget _buildLogMealButton(WidgetRef ref, BuildContext context) {
         ref,
       );
     },
-    child: const Row(
+    child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Log your meals!'),
-        Icon(Icons.add),
+        Text(AppLocalizations.of(_context)!.buttonsLogMeal),
+        const Icon(Icons.add),
       ],
     ),
   );

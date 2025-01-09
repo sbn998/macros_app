@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:macros_app/providers/calendar_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:macros_app/providers/calendar_provider.dart';
 import 'package:macros_app/providers/date_provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -92,14 +93,14 @@ void showCalendar(BuildContext context) {
                           DateTime.now();
                       Navigator.pop(context);
                     },
-                    child: const Text('Today'),
+                    child: Text(AppLocalizations.of(context)!.dateToday),
                   ),
                   const SizedBox(width: 10.0),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Close'),
+                    child: Text(AppLocalizations.of(context)!.buttonsClose),
                   ),
                 ],
               ),

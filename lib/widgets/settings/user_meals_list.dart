@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:macros_app/models/user_meal_model.dart';
 
 // TODO: Add a Snackbar to undo the action of deleting a user meal.
@@ -94,7 +96,7 @@ class _UserMealsListViewState extends State<UserMealsListView> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: TextField(
           decoration: InputDecoration(
-            hintText: 'Enter a meal name',
+            hintText: AppLocalizations.of(context)!.enterMealName,
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.transparent),
             ),
@@ -124,7 +126,7 @@ class _UserMealsListViewState extends State<UserMealsListView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Add a meal',
+              AppLocalizations.of(context)!.addMeal,
               style: TextStyle(
                   fontSize: 15.0, color: Theme.of(context).colorScheme.primary),
             ),

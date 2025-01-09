@@ -2,69 +2,69 @@
   "@note": {
     "description": "Misc messages like dialog titles."
   }
-  "add_food": "Add some food",
-  "food_name": "Food name",
-  "select_food": "Select your food",
-  "select_meal": "Select your meal",
-  "your_macro_goals": "Your macro goals",
-  "add_new_goal": "Add a new goal",
-  "add_edit_meals": "Add or Edit your meals",
-  "add_food_exclamation": "Add food!"
-  "food_screen": "This is the Food screen",
+  "addFood": "Add some food",
+  "foodName": "Food name",
+  "selectFood": "Select your food",
+  "selectMeal": "Select your meal",
+  "yourMacroGoals": "Your macro goals",
+  "addNewGoal": "Add a new goal",
+  "addEditMeals": "Add or Edit your meals",
+  "addFoodExclamation": "Add food!"
+  "foodScreen": "This is the Food screen",
   "error": "Error",
-  "no_goals": "No goals for the day",
-  "total_summary": "Total:       ",
-  "enter_meal_name": "Enter a meal name",
-  "add_meal": "Add a meal",
+  "noGoals": "No goals for the day",
+  "totalSummary": "Total:       ",
+  "enterMealName": "Enter a meal name",
+  "addMeal": "Add a meal",
 
   "@note": {
     "description": "Settings screen translations"
   }
-  "settings_add_edit_meals": "Add/Edit your meals",
-  "settings_add_edit_goals": "Add/Edit your goals",
+  "settingsAddEditMeals": "Add/Edit your meals",
+  "settingsAddEditGoals": "Add/Edit your goals",
 
   "@note": {
     "description": "Text fields section.",
   }
-  "macro_goal_name": "Macro goal name",
+  "macroGoalName": "Macro goal name",
 
   "@note": {
     "description": "Labels sections."
   }
-  "labels_your_food": "Your Food",
-  "labels_meals": "Meals",
-  "labels_settings": "Settings",
+  "labelsYourFood": "Your Food",
+  "labelsMeals": "Meals",
+  "labelsSettings": "Settings",
 
   "@note": {
     "description": "Buttons section."
   } 
-  "buttons_close": "Close",
-  "buttons_confirm": "Confirm",
-  "buttons_cancel": "Cancel",
-  "buttons_confirm_changes": "Confirm changes",
-  "buttons_start_adding_food": "Start adding food!",
-  "buttons_start_adding_goal": "Start by adding one",
-  "buttons_log_meal": "Log your meals!",
+  "buttonsClose": "Close",
+  "buttonsConfirm": "Confirm",
+  "buttonsCancel": "Cancel",
+  "buttonsConfirmChanges": "Confirm changes",
+  "buttonsStartAddingFood": "Start adding food!",
+  "buttonsStartAddingGoal": "Start by adding one",
+  "buttonsLogMeal": "Log your meals!",
 
   "@note": {
     "description": "Translations related to dates."
   }
-  "date_today": "Today",
-  "date_tomorrow": "Tomorrow",
-  "date_yesterday": "Yesterday",
-  "days_shortest_monday": "M",
-  "days_shortest_tuesday": "Tu",
-  "days_shortest_wednesday": "W",
-  "days_shortest_thursday": "Th",
-  "days_shortest_friday": "F",
-  "days_shortest_saturday": "S",
-  "days_shortest_sunday": "U",
+  "dateToday": "Today",
+  "dateTomorrow": "Tomorrow",
+  "dateYesterday": "Yesterday",
+  "daysShortestMonday": "M",
+  "daysShortestTuesday": "Tu",
+  "daysShortestWednesday": "W",
+  "daysShortestThursday": "Th",
+  "daysShortestFriday": "F",
+  "daysShortestSaturday": "S",
+  "daysShortestSunday": "U",
 
   "@note": {
     "description": "Translations for screen titles"
   }
-  "screens_your_food": "Your Food",
-  "screens_settings": "Settings",
+  "screensYourFood": "Your Food",
+  "screensSettings": "Settings",
 
   "@note": {
     "description": "Macros section."
@@ -73,15 +73,15 @@
   "protein": "Protein",
   "carbs": "Carbohydrates"
   "fats": "Fats",
-  "serving_quantity": "Serving Quantity",
-  "serving_name": "Serving Name"
+  "servingQuantity": "Serving Quantity",
+  "servingName": "Serving Name"
 
   "@note": {
     "description": "Validator messages section."
   }
-  "null_serving_name": "Please insert your serving unit(s).",
-  "null_food_name": "Please write a name.",
-  "short_food_name": "Name must be at least 3 characters long."
-  "long_food_name": "Name must be shorter than 40 characters.",
-  "invalid_double": "Please enter a valid number."
+  "nullServingName": "Please insert your serving unit(s).",
+  "nullFoodName": "Please write a name.",
+  "shortFoodName": "Name must be at least 3 characters long."
+  "longFoodName": "Name must be shorter than 40 characters.",
+  "invalidDouble": "Please enter a valid number."
 }

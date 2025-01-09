@@ -118,7 +118,7 @@ Widget _buildFoodNameFormTextField() {
       label: Text(AppLocalizations.of(_context)!.foodName),
     ),
     validator: (value) {
-      return validateNameString(_context, value!);
+      return validateName(_context, value!);
     },
     onSaved: (textFormFieldFoodName) {
       _foodName = textFormFieldFoodName!;

@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:macros_app/constants/max_string_length.dart';
 
-dynamic validateNameString(BuildContext context, String? nameToValidate) {
+dynamic validateName(BuildContext context, String? nameToValidate) {
   if (nameToValidate == null || nameToValidate.isEmpty) {
     return AppLocalizations.of(context)!.nullFoodName;
   }

@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/providers/calendar_provider.dart';
 import 'package:macros_app/providers/date_provider.dart';
+import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 void showCalendar(BuildContext context) {

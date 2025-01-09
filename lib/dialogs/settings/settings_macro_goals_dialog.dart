@@ -20,6 +20,7 @@ late List<MacroGoal> _dbMacroGoals;
 late Map<int, bool> _isDaySelected;
 late StateSetter _setState;
 late WidgetRef _ref;
+late BuildContext _context;
 
 Future<void> showMacroGoalsDialog(BuildContext context, WidgetRef ref) async {
   await _loadMacroGoals();
@@ -75,6 +76,8 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
 LayoutBuilder _buildLayoutBuilder(BuildContext context) {
   return LayoutBuilder(
     builder: (context, constraints) {
+      _context = context;
+
       Widget child = const Center(
         child: CircularProgressIndicator(),
       );
@@ -196,6 +199,7 @@ Widget _buildMacrosFormTextField(
   );
 }
 
+//TODO: extract this into a different file to reuse.
 dynamic _validateMacroGoalName(String? nameToValidate) {
   if (nameToValidate == null || nameToValidate.isEmpty) {
     return 'Please write a name.';
@@ -218,6 +222,7 @@ dynamic _validateMacroGoalName(String? nameToValidate) {
   }
 }
 
+//TODO: extract this into a different file to reuse.
 dynamic _validateMacrosForm(String? valueToValidate) {
   if (valueToValidate != null && valueToValidate.isNotEmpty) {
     try {

@@ -8,8 +8,6 @@ import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 import 'package:macros_app/widgets/settings/macro_goals_day_selector.dart';
 
-//TODO: add way to select days for each goal.
-
 bool _isEditing = false;
 Map<String, dynamic> _editableValues = {};
 Map<String, TextEditingController> _controllers = {};

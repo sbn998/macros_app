@@ -46,9 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildGestureDetector(DateTime date) {
     return GestureDetector(
       onHorizontalDragEnd: (details) => _detectSwipeDirection(date, details),
-      child: const SingleChildScrollView(
-        child: LoggingScreen(),
-      ),
+      child: const LoggingScreen(),
     );
   }
 

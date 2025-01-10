@@ -8,7 +8,6 @@ import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 
 class MacroGoalsListView extends StatefulWidget {
   final List<MacroGoal> dbMacroGoals;
-  final WidgetRef ref;
 
   @override
   State<MacroGoalsListView> createState() {
@@ -18,7 +17,6 @@ class MacroGoalsListView extends StatefulWidget {
   const MacroGoalsListView({
     super.key,
     required this.dbMacroGoals,
-    required this.ref,
   });
 }
 
@@ -66,19 +64,23 @@ class _MacroGoalsListViewState extends State<MacroGoalsListView> {
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                  onPressed: () async {
-                    final List<int> intGoalDays =
-                        await getDaysForGoal(_dbMacroGoals[index].id);
-                    await deleteMacroGoal(_dbMacroGoals[index].id);
-                    for (var int in intGoalDays) {
-                      widget.ref.invalidate(fetchedDailyMacrosProvider(int));
-                    }
-                    setState(() {
-                      _dbMacroGoals.removeAt(index);
-                    });
+                Consumer(
+                  builder: (context, ref, _) {
+                    return IconButton(
+                      onPressed: () async {
+                        final List<int> intGoalDays =
+                            await getDaysForGoal(_dbMacroGoals[index].id);
+                        await deleteMacroGoal(_dbMacroGoals[index].id);
+                        for (var int in intGoalDays) {
+                          ref.invalidate(fetchedDailyMacrosProvider(int));
+                        }
+                        setState(() {
+                          _dbMacroGoals.removeAt(index);
+                        });
+                      },
+                      icon: const Icon(Icons.delete),
+                    );
                   },
-                  icon: const Icon(Icons.delete),
                 ),
               ],
             ),

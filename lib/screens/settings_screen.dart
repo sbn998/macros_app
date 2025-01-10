@@ -50,7 +50,7 @@ Widget _buildListView(BuildContext context) {
       ),
       _buildInkWell(
         onTap: () {
-          showMacroGoalsDialog(context, _ref);
+          showMacroGoalsDialog(context);
         },
         settingName: AppLocalizations.of(context)!.settingsAddEditGoals,
         icon: Icons.edit,

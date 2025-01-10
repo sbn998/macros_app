@@ -24,16 +24,15 @@ late StateSetter _setState;
 late WidgetRef _ref;
 late BuildContext _context;
 
-Future<void> showMacroGoalsDialog(BuildContext context, WidgetRef ref) async {
+Future<void> showMacroGoalsDialog(BuildContext context) async {
+  if (!context.mounted) {
+    return;
+  }
+
   await _loadMacroGoals();
   _isDaySelected = {
     for (int i = 1; i < 8; i++) i: false,
   };
-  _ref = ref;
-
-  if (!context.mounted) {
-    return;
-  }
 
   bool? result = await showModalBottomSheet(
     context: context,
@@ -116,7 +115,7 @@ Widget _buildSavedMacroGoalsColumn(BuildContext context) {
       ),
       _buildButtonsRow(context),
       _addGoalsButton(context),
-      MacroGoalsListView(dbMacroGoals: _dbMacroGoals, ref: _ref),
+      MacroGoalsListView(dbMacroGoals: _dbMacroGoals),
       const SizedBox(
         height: 25,
       ),
@@ -239,19 +238,21 @@ Widget _buildButtonsRow(BuildContext context) {
                 : AppLocalizations.of(_context)!.buttonsCancel,
           ),
           if (_mode != 'normal')
-            TextButton(
-              onPressed: () {
-                _saveMacroGoal();
-              },
-              child: Text(AppLocalizations.of(_context)!.buttonsConfirm),
-            ),
+            Consumer(builder: (context, ref, _) {
+              return TextButton(
+                onPressed: () {
+                  _saveMacroGoal(ref);
+                },
+                child: Text(AppLocalizations.of(_context)!.buttonsConfirm),
+              );
+            }),
         ],
       ),
     ],
   );
 }
 
-void _saveMacroGoal() async {
+void _saveMacroGoal(WidgetRef ref) async {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
     MacroGoal newMacroGoal = MacroGoal(
@@ -266,7 +267,7 @@ void _saveMacroGoal() async {
     for (var entry in _isDaySelected.entries) {
       if (entry.value) {
         await insertDayMacroGoal(entry.key, newMacroGoal.id);
-        _ref.invalidate(fetchedDailyMacrosProvider(entry.key));
+        ref.invalidate(fetchedDailyMacrosProvider(entry.key));
       }
     }
 

@@ -21,7 +21,7 @@ class FoodScreen extends ConsumerWidget {
     }
 
     if (foodList.isNotEmpty) {
-      return ListviewWithIndexes(foodList: foodList);
+      return const ListviewWithIndexes();
     }
     return Center(
       child: Column(

@@ -8,11 +8,8 @@ import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/providers/saved_food_provider.dart';
 
 class ListviewWithIndexes extends ConsumerStatefulWidget {
-  final List<Food> foodList;
-
   const ListviewWithIndexes({
     super.key,
-    required this.foodList,
   });
 
   @override

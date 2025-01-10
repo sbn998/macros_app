@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/dialogs/settings/settings_macro_goals_dialog.dart';
 import 'package:macros_app/dialogs/settings/settings_meals_dialog.dart';
 
-late WidgetRef _ref;
-
 class SettingsScreen extends StatelessWidget {
-  final WidgetRef ref;
-
-  const SettingsScreen({super.key, required this.ref});
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    _ref = ref;
-
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: _buildSettingsScreenContent(context),

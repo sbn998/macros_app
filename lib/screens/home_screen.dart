@@ -64,7 +64,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: _buildGestureDetector(date),
         );
       case 2:
-        return SettingsScreen(ref: ref);
+        return const SettingsScreen();
       default:
         return const Text('');
     }

@@ -19,8 +19,6 @@ List<Food> _savedFoods = [];
 late UserMeal _selectedUserMeal;
 List<LoggedFood> _selectedFood = [];
 late StateSetter _setState;
-late DateTime _selectedDate;
-late WidgetRef _ref;
 final ScrollController _scrollController = ScrollController();
 
 void _addOrRemoveSelectedFood(LoggedFood foodToAdd) {
@@ -29,10 +27,8 @@ void _addOrRemoveSelectedFood(LoggedFood foodToAdd) {
   }
 }
 
-void showAddMealDialog(BuildContext context, WidgetRef ref) async {
+void showAddMealDialog(BuildContext context) async {
   await _loadData();
-  _ref = ref;
-  _selectedDate = ref.read(selectedDateProvider.notifier).state;
 
   if (!context.mounted) {
     return;
@@ -61,8 +57,9 @@ Future<void> _loadData() async {
   _savedFoods = await getSavedFood();
 }
 
-Future<void> _insertLoggedMeal(LoggedMeal loggedMeal, DateTime date) async {
-  await _ref
+Future<void> _insertLoggedMeal(LoggedMeal loggedMeal, WidgetRef ref) async {
+  final DateTime date = ref.read(selectedDateProvider.notifier).state;
+  await ref
       .read(loggedMealsProvider(date).notifier)
       .addLoggedMeal(date, loggedMeal);
 }
@@ -99,27 +96,31 @@ StatefulBuilder _buildStatefulBuilder(BuildContext context) {
         actions: [
           const CloseButtonWidget(),
           if (_isMealSelected)
-            ElevatedButton(
-              onPressed: () async {
-                await _insertLoggedMeal(
-                  LoggedMeal(
-                    loggedUserMeal: _selectedUserMeal,
-                    loggedFood: _selectedFood,
-                  ),
-                  _selectedDate,
-                ).then((_) {
-                  _selectedFood.clear();
-                  _selectedUserMeal = UserMeal.empty();
-                  _isMealSelected = false;
-                });
+            Consumer(
+              builder: (context, ref, _) {
+                return ElevatedButton(
+                  onPressed: () async {
+                    await _insertLoggedMeal(
+                      LoggedMeal(
+                        loggedUserMeal: _selectedUserMeal,
+                        loggedFood: _selectedFood,
+                      ),
+                      ref,
+                    ).then((_) {
+                      _selectedFood.clear();
+                      _selectedUserMeal = UserMeal.empty();
+                      _isMealSelected = false;
+                    });
 
-                if (!context.mounted) {
-                  return;
-                }
+                    if (!context.mounted) {
+                      return;
+                    }
 
-                Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(AppLocalizations.of(context)!.buttonsConfirm),
+                );
               },
-              child: Text(AppLocalizations.of(context)!.buttonsConfirm),
             )
         ],
       );

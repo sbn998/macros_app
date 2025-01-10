@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
+import 'package:macros_app/constants/map_entries.dart';
 
 class LoggedMealNotifier extends StateNotifier<LoggedMeal> {
   LoggedMealNotifier({required LoggedMeal loggedMeal}) : super(loggedMeal);
@@ -50,10 +51,10 @@ class LoggedMealMacrosNotifier extends StateNotifier<Map<String, double>> {
     }
 
     return {
-      'kcal': totalCalories,
-      'protein': totalProtein,
-      'carbs': totalCarbs,
-      'fats': totalFats,
+      kCaloriesKey: totalCalories,
+      kProteinKey: totalProtein,
+      kCarbsKey: totalCarbs,
+      kFatsKey: totalFats,
     };
   }
 

@@ -183,7 +183,7 @@ class _LoggedMealWidgetState extends ConsumerState<LoggedMealWidget> {
                     style: const TextStyle(fontSize: 16),
                   ),
                   Text(
-                    '${food.protein! * food.loggedQuantity / food.servingQuantity!}P  ${food.carbs! * food.loggedQuantity / food.servingQuantity!}C  ${food.fats! * food.loggedQuantity / food.servingQuantity!}F',
+                    getMacrosOnly(food),
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],
@@ -234,7 +234,7 @@ class _LoggedMealWidgetState extends ConsumerState<LoggedMealWidget> {
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      '${food.protein! * food.loggedQuantity / food.servingQuantity!}P  ${food.carbs! * food.loggedQuantity / food.servingQuantity!}C  ${food.fats! * food.loggedQuantity / food.servingQuantity!}F',
+                      getMacrosOnly(food),
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: Colors.white54,
                           ),

@@ -29,6 +29,7 @@ class DoubleTextFormField extends StatelessWidget {
 
     return TextFormField(
         maxLength: maxLength,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           label: Text(localizationsMap[fieldLabel]!),
         ),

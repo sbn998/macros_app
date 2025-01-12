@@ -16,10 +16,6 @@ class FoodScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final foodList = ref.watch(savedFoodProvider);
 
-    void addFood(Food newFood) async {
-      await ref.read(savedFoodProvider.notifier).addSavedFood(newFood);
-    }
-
     if (foodList.isNotEmpty) {
       return const ListviewWithIndexes();
     }
@@ -32,7 +28,7 @@ class FoodScreen extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              showAddFoodDialog(context, addFood);
+              showAddFoodDialog(context);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -5,9 +5,9 @@ import 'package:macros_app/providers/saved_food_provider.dart';
 
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/constants/map_entries.dart';
-import 'package:macros_app/widgets/add_food/form_content.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/buttons/confirm_button_widget.dart';
+import 'package:macros_app/widgets/food_screen/add_food/food_content.dart';
 
 class AddFoodModal extends StatelessWidget {
   const AddFoodModal({super.key});

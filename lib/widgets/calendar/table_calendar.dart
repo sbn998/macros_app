@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'package:macros_app/constants/date_times.dart';
 import 'package:macros_app/providers/calendar_provider.dart';
 import 'package:macros_app/providers/date_provider.dart';
 
@@ -42,8 +43,8 @@ class CustomTableCalendar extends ConsumerWidget {
     if (markedDatesAsync is AsyncData) {
       return TableCalendar(
         focusedDay: displayedMonth,
-        firstDay: DateTime(2000),
-        lastDay: DateTime(2100),
+        firstDay: kFirstCalendarYear,
+        lastDay: kLastCalendarYear,
         currentDay: selectedDate,
         calendarFormat: CalendarFormat.month,
         headerStyle: const HeaderStyle(

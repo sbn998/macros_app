@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:macros_app/providers/saved_food_provider.dart';
 
+import 'package:macros_app/providers/saved_food_provider.dart';
+import 'package:macros_app/functions/update_map_values.dart';
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/constants/map_entries.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
@@ -49,41 +50,6 @@ class AddFoodModal extends StatelessWidget {
       }
     }
 
-    void updateDoubleValue(String mapKey, String newValue) {
-      final double parsedValue = double.parse(newValue);
-
-      switch (mapKey) {
-        case kCaloriesKey:
-          foodValues[kCaloriesKey] = parsedValue;
-          break;
-        case kProteinKey:
-          foodValues[kProteinKey] = parsedValue;
-          break;
-        case kCarbsKey:
-          foodValues[kCarbsKey] = parsedValue;
-          break;
-        case kFatsKey:
-          foodValues[kFatsKey] = parsedValue;
-          break;
-        case kServingQuantityKey:
-          foodValues[kServingQuantityKey] = parsedValue;
-          break;
-        default:
-      }
-    }
-
-    void updateStringValue(String mapKey, String newValue) {
-      switch (mapKey) {
-        case kFoodNameKey:
-          foodValues[kFoodNameKey] = newValue;
-          break;
-        case kServingNameKey:
-          foodValues[kServingNameKey] = newValue;
-          break;
-        default:
-      }
-    }
-
     Widget buttonsRow() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -117,6 +83,7 @@ class AddFoodModal extends StatelessWidget {
             child: Form(
               key: formKey,
               child: AddFoodFormContent(
+                callbackMap: foodValues,
                 onSavedNameCallback: updateStringValue,
                 onSavedDoubleCallback: updateDoubleValue,
               ),

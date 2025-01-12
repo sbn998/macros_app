@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class DetailsDialogTitle extends StatelessWidget {
   final String title;
+  final Function() onPressEdit;
 
-  const DetailsDialogTitle({super.key, required this.title});
+  const DetailsDialogTitle({
+    super.key,
+    required this.title,
+    required this.onPressEdit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +23,7 @@ class DetailsDialogTitle extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            // _setState(() {
-            //   _isEditing = !_isEditing;
-            // });
+            onPressEdit();
           },
           icon: const Icon(
             Icons.edit,

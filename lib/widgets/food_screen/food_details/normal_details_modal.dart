@@ -8,10 +8,12 @@ import 'package:macros_app/widgets/text/dialog_title.dart';
 
 class SavedFoodDetailsModal extends StatelessWidget {
   final Food tappedFood;
+  final Function() onPressEdit;
 
   const SavedFoodDetailsModal({
     super.key,
     required this.tappedFood,
+    required this.onPressEdit,
   });
 
   @override
@@ -43,7 +45,10 @@ class SavedFoodDetailsModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DetailsDialogTitle(title: tappedFood.foodName),
+            DetailsDialogTitle(
+              onPressEdit: onPressEdit,
+              title: tappedFood.foodName,
+            ),
             const SizedBox(height: 20.0),
             for (var key in localizationMap.keys)
               DetailsField(

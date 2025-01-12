@@ -7,10 +7,12 @@ import 'package:macros_app/functions/validators/validators.dart';
 class DoubleTextFormField extends StatelessWidget {
   final int maxLength;
   final String fieldLabel;
-  final Function(String, String) onSavedCallback;
+  final Map<String, dynamic> callbackMap;
+  final Function(Map<dynamic, dynamic>, String, String) onSavedCallback;
 
   const DoubleTextFormField({
     super.key,
+    required this.callbackMap,
     required this.maxLength,
     required this.fieldLabel,
     required this.onSavedCallback,
@@ -38,7 +40,11 @@ class DoubleTextFormField extends StatelessWidget {
         },
         onSaved: (textFormFieldValue) {
           if (textFormFieldValue != null && textFormFieldValue.isNotEmpty) {
-            onSavedCallback(fieldLabel, textFormFieldValue);
+            onSavedCallback(
+              callbackMap,
+              fieldLabel,
+              textFormFieldValue,
+            );
           }
         });
   }

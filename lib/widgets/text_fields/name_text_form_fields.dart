@@ -8,13 +8,15 @@ class NameTextFormField extends StatelessWidget {
   final int maxLength;
   final int minLength;
   final String fieldLabel;
-  final Function(String, String) onSavedCallback;
+  final Map<String, dynamic> callbackMap;
+  final Function(Map<dynamic, dynamic>, String, String) onSavedCallback;
 
   const NameTextFormField({
     super.key,
     required this.maxLength,
     required this.minLength,
     required this.fieldLabel,
+    required this.callbackMap,
     required this.onSavedCallback,
   });
 
@@ -40,7 +42,11 @@ class NameTextFormField extends StatelessWidget {
         );
       },
       onSaved: (textFormFieldFoodName) {
-        onSavedCallback(fieldLabel, textFormFieldFoodName!);
+        onSavedCallback(
+          callbackMap,
+          fieldLabel,
+          textFormFieldFoodName!,
+        );
       },
     );
   }

@@ -73,7 +73,7 @@
   "protein": "Proteina",
   "carbs": "Carbohidratos",
   "fats": "Grasas",
-  "servingQuantity": "Porción",
+  "servingQuantity": "Tamaño de la porción",
   "servingName": "Nombre de la porción",
 
   "@note": {

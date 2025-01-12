@@ -4,26 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:macros_app/constants/max_string_length.dart';
 
 dynamic validateName(BuildContext context, String? nameToValidate) {
+  final AppLocalizations translations = AppLocalizations.of(context)!;
+
   if (nameToValidate == null || nameToValidate.isEmpty) {
-    return AppLocalizations.of(context)!.nullFoodName;
+    return translations.nullFoodName;
   }
 
   if (nameToValidate.length <= kMinFoodNameLength) {
-    return AppLocalizations.of(context)!.shortFoodName;
+    return translations.shortFoodName;
   }
   if (nameToValidate.length > kMaxFoodNameLength) {
-    return AppLocalizations.of(context)!.longFoodName;
+    return translations.longFoodName;
   }
 
   return null;
 }
 
 dynamic validateDoubleValue(BuildContext context, String? valueToValidate) {
+  final AppLocalizations translations = AppLocalizations.of(context)!;
+
   if (valueToValidate != null && valueToValidate.isNotEmpty) {
     try {
       double.parse(valueToValidate);
     } catch (e) {
-      return AppLocalizations.of(context)!.invalidDouble;
+      return translations.invalidDouble;
     }
   }
   return null;

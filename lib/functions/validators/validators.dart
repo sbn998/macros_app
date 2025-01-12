@@ -1,19 +1,23 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
-import 'package:macros_app/constants/max_string_length.dart';
 
-dynamic validateName(BuildContext context, String? nameToValidate) {
+dynamic validateName(
+  BuildContext context,
+  String? nameToValidate,
+  int maxLength,
+  int minLength,
+) {
   final AppLocalizations translations = AppLocalizations.of(context)!;
 
   if (nameToValidate == null || nameToValidate.isEmpty) {
     return translations.nullFoodName;
   }
 
-  if (nameToValidate.length <= kMinFoodNameLength) {
+  if (nameToValidate.length <= minLength) {
     return translations.shortFoodName;
   }
-  if (nameToValidate.length > kMaxFoodNameLength) {
+  if (nameToValidate.length > maxLength) {
     return translations.longFoodName;
   }
 

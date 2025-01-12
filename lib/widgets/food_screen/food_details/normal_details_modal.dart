@@ -38,17 +38,20 @@ class SavedFoodDetailsModal extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DetailsDialogTitle(title: tappedFood.foodName),
-          const SizedBox(height: 20.0),
-          for (var key in localizationMap.keys)
-            DetailsField(
-              fieldName: localizationMap[key]!,
-              fieldValue: foodMap[key].toString(),
-            )
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DetailsDialogTitle(title: tappedFood.foodName),
+            const SizedBox(height: 20.0),
+            for (var key in localizationMap.keys)
+              DetailsField(
+                fieldName: localizationMap[key]!,
+                fieldValue: foodMap[key].toString(),
+              )
+          ],
+        ),
       ),
     );
   }

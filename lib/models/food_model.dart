@@ -1,5 +1,7 @@
-import 'package:macros_app/constants/map_entries.dart';
 import 'package:uuid/uuid.dart';
+
+import 'package:macros_app/constants/strings.dart';
+import 'package:macros_app/constants/map_entries.dart';
 
 const _uuid = Uuid();
 
@@ -27,7 +29,7 @@ class Food {
         protein = (protein ?? 0.0).toDouble(),
         carbs = (carbs ?? 0.0).toDouble(),
         fats = (fats ?? 0.0).toDouble(),
-        serving = serving ?? 'g',
+        serving = serving ?? kDefaultServingName,
         servingQuantity = (servingQuantity ?? 100.0).toDouble();
 
   Map<String, dynamic> toMap() {

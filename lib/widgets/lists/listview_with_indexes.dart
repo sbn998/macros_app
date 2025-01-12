@@ -20,10 +20,6 @@ class ListviewWithIndexes extends ConsumerStatefulWidget {
 class _ListviewWithIndexesState extends ConsumerState<ListviewWithIndexes> {
   final ScrollController _scrollController = ScrollController();
 
-  void _addFood(Food newFood) async {
-    await ref.read(savedFoodProvider.notifier).addSavedFood(newFood);
-  }
-
   void _removeFood(Food removedFood) async {
     await ref.read(savedFoodProvider.notifier).removeSavedFood(removedFood.id);
   }
@@ -127,7 +123,7 @@ class _ListviewWithIndexesState extends ConsumerState<ListviewWithIndexes> {
         ),
         TextButton(
           onPressed: () {
-            showAddFoodDialog(context, _addFood);
+            showAddFoodDialog(context);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

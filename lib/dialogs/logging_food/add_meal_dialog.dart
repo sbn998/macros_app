@@ -10,7 +10,7 @@ import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/models/user_meal_model.dart';
-import 'package:macros_app/widgets/add_food/food_selection.dart';
+import 'package:macros_app/widgets/food_screen/add_food/food_selection.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 
 bool _isMealSelected = false;

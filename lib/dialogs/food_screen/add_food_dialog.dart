@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:macros_app/widgets/add_food/add_food_modal.dart';
+import 'package:macros_app/widgets/food_screen/add_food/add_food_modal.dart';
 
 void showAddFoodDialog(BuildContext context) {
   showModalBottomSheet(

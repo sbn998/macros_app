@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
+import 'package:macros_app/widgets/food_screen/food_details/normal_details_modal.dart';
 
 //TODO: Add some graphics to show the macros visually.
 

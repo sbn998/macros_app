@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:macros_app/dialogs/logging_food/add_meal_dialog.dart';
 import 'package:macros_app/models/logged_food_model.dart';
-
 import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/providers/calculated_macros_provider.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
@@ -40,7 +40,7 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
   Widget _buildLogMealButton(BuildContext context) {
     return TextButton(
       onPressed: () {
-        showAddMealDialog(context);
+        showAddMealDialog(context, null, null);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

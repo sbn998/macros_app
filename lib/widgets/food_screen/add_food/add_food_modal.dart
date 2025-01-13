@@ -58,7 +58,7 @@ class AddFoodModal extends StatelessWidget {
           Consumer(
             builder: (context, ref, _) {
               return ConfirmButtonWidget(
-                callback: (context) {
+                callback: () {
                   saveFood(ref);
                 },
               );

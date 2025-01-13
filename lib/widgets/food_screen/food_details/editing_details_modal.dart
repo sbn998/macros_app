@@ -70,7 +70,7 @@ class _EditingDetailsModalState extends State<EditingSavedFoodModal> {
           Consumer(
             builder: (context, ref, _) {
               return ConfirmButtonWidget(
-                callback: (context) async {
+                callback: () async {
                   if (!context.mounted) {
                     return;
                   }

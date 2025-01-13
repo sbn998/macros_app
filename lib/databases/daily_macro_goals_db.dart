@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:macros_app/constants/map_entries.dart';
+import 'package:macros_app/constants/table_names.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:macros_app/databases/initialize_db.dart';
@@ -12,10 +14,10 @@ Future<Map<String, dynamic>> getDayMacroGoals(
   final db = await getDatabase();
   final List<Map<String, dynamic>> dayMacroGoals = await db.rawQuery(
     '''
-  SELECT d.day, m.calories, m.protein, m.carbs, m.fats
-  FROM daily_macro_goals d
-  JOIN macro_goals m on d.macro_goal_id = m.id
-  WHERE d.day = ?
+  SELECT d.$kDayKey, m.$kCaloriesKey, m.$kProteinKey, m.$kCarbsKey, m.$kFatsKey
+  FROM $kDailyMacroGoalsTable d
+  JOIN $kMacroGoalsTable m on d.$kMacroGoalIdKey = m.$kIdKey
+  WHERE d.$kDayKey = ?
   ''',
     [dayIndex],
   );
@@ -34,17 +36,17 @@ Future<List<int>> getDaysForGoal(
   final db = await getDatabase();
   final List<Map<String, dynamic>> dayMacroGoals = await db.rawQuery(
     '''
-  SELECT d.day
-  FROM daily_macro_goals d
-  JOIN macro_goals m on d.macro_goal_id = m.id
-  WHERE m.id = ?
+  SELECT d.$kDayKey
+  FROM $kDailyMacroGoalsTable d
+  JOIN $kMacroGoalsTable m on d.$kMacroGoalIdKey = m.$kIdKey
+  WHERE m.$kIdKey = ?
   ''',
     [id],
   );
 
   if (dayMacroGoals.isNotEmpty) {
     for (var row in dayMacroGoals) {
-      daysForGoal.add(row['day']);
+      daysForGoal.add(row[kDayKey]);
     }
     return daysForGoal;
   } else {
@@ -56,10 +58,10 @@ Future<void> insertDayMacroGoal(int dayIndex, String macroGoalId) async {
   final db = await getDatabase();
 
   await db.insert(
-    'daily_macro_goals',
+    kDailyMacroGoalsTable,
     {
-      'day': dayIndex,
-      'macro_goal_id': macroGoalId,
+      kDayKey: dayIndex,
+      kMacroGoalIdKey: macroGoalId,
     },
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
@@ -69,12 +71,12 @@ Future<void> updateDayMacroGoal(int dayIndex, String newMacroGoalId) async {
   final db = await getDatabase();
 
   await db.update(
-    'daily_macro_goals',
+    kDailyMacroGoalsTable,
     {
-      'day': dayIndex,
-      'macro_goal_id': newMacroGoalId,
+      kDayKey: dayIndex,
+      kMacroGoalIdKey: newMacroGoalId,
     },
-    where: 'day = ?',
+    where: '$kDayKey = ?',
     whereArgs: [dayIndex],
   );
 }
@@ -83,13 +85,13 @@ Future<void> deleteDayMacroGoal(int dayIndex) async {
   final db = await getDatabase();
 
   await db.update(
-    'daily_macro_goals',
+    kDailyMacroGoalsTable,
     {
-      'day': dayIndex,
+      kDayKey: dayIndex,
       // If unset, a widget to add a macro goal will be shown.
-      'macro_goal_id': 'unset',
+      kMacroGoalIdKey: 'unset',
     },
-    where: 'day = ?',
+    where: '$kDayKey = ?',
     whereArgs: [dayIndex],
   );
 }

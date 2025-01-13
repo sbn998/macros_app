@@ -1,3 +1,4 @@
+import 'package:macros_app/constants/map_entries.dart';
 import 'package:macros_app/models/food_model.dart';
 
 class LoggedFood extends Food {
@@ -32,21 +33,22 @@ class LoggedFood extends Food {
   @override
   Map<String, dynamic> toMap() {
     final baseMap = super.toMap();
-    baseMap['logged_quantity'] = loggedQuantity;
+    baseMap[kLoggedQuantityKey] = loggedQuantity;
     return baseMap;
   }
 
   static LoggedFood fromMap(Map<String, dynamic> mapValues) {
     return LoggedFood(
-      foodName: mapValues['food_name'] as String,
-      calories: (mapValues['calories'] as num?)?.toDouble() ?? 0.0,
-      protein: (mapValues['protein'] as num?)?.toDouble() ?? 0.0,
-      carbs: (mapValues['carbs'] as num?)?.toDouble() ?? 0.0,
-      fats: (mapValues['fats'] as num?)?.toDouble() ?? 0.0,
-      serving: mapValues['serving'] as String,
+      foodName: mapValues[kFoodNameKey] as String,
+      calories: (mapValues[kCaloriesKey] as num?)?.toDouble() ?? 0.0,
+      protein: (mapValues[kProteinKey] as num?)?.toDouble() ?? 0.0,
+      carbs: (mapValues[kCarbsKey] as num?)?.toDouble() ?? 0.0,
+      fats: (mapValues[kFatsKey] as num?)?.toDouble() ?? 0.0,
+      serving: mapValues[kServingNameKey] as String,
       servingQuantity:
-          (mapValues['serving_quantity'] as num?)?.toDouble() ?? 0.0,
-      loggedQuantity: (mapValues['logged_quantity'] as num?)?.toDouble() ?? 0.0,
+          (mapValues[kServingQuantityKey] as num?)?.toDouble() ?? 0.0,
+      loggedQuantity:
+          (mapValues[kLoggedQuantityKey] as num?)?.toDouble() ?? 0.0,
     );
   }
 
@@ -54,7 +56,7 @@ class LoggedFood extends Food {
   void updateFoodFromMap(Map<String, dynamic> newValues) {
     super.updateFoodFromMap(newValues);
     loggedQuantity =
-        (newValues['logged_quantity'] as num?)?.toDouble() ?? loggedQuantity;
+        (newValues[kLoggedQuantityKey] as num?)?.toDouble() ?? loggedQuantity;
   }
 
   @override

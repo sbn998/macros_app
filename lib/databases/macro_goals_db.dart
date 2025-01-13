@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:sqflite/sqflite.dart';
 
+import 'package:macros_app/constants/map_entries.dart';
+import 'package:macros_app/constants/table_names.dart';
 import 'package:macros_app/databases/initialize_db.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 
@@ -11,12 +13,12 @@ Future<List<MacroGoal>> getMacroGoals() async {
 
   return [
     for (final {
-          'id': id as String,
-          'goal_name': goalName as String,
-          'calories': calories as double,
-          'protein': protein as double,
-          'carbs': carbs as double,
-          'fats': fats as double,
+          kIdKey: id as String,
+          kGoalNameKey: goalName as String,
+          kCaloriesKey: calories as double,
+          kProteinKey: protein as double,
+          kCarbsKey: carbs as double,
+          kFatsKey: fats as double,
         } in macroGoals)
       MacroGoal(
         id: id,
@@ -33,7 +35,7 @@ Future<void> insertMacroGoal(MacroGoal macroGoal) async {
   final db = await getDatabase();
 
   await db.insert(
-    'macro_goals',
+    kMacroGoalsTable,
     macroGoal.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
@@ -43,7 +45,7 @@ Future<void> updateMacroGoal(MacroGoal updatedMacroGoal) async {
   final db = await getDatabase();
 
   await db.update(
-    'macro_goals',
+    kMacroGoalsTable,
     updatedMacroGoal.toMap(),
     where: 'id = ?',
     whereArgs: [updatedMacroGoal.id],
@@ -54,7 +56,7 @@ Future<void> deleteMacroGoal(String id) async {
   final db = await getDatabase();
 
   await db.delete(
-    'macro_goals',
+    kMacroGoalsTable,
     where: 'id = ?',
     whereArgs: [id],
   );

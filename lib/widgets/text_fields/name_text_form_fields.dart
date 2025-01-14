@@ -26,6 +26,7 @@ class NameTextFormField extends StatelessWidget {
     final Map<String, String> localizationsMap = {
       kFoodNameKey: translations.foodName,
       kServingNameKey: translations.servingName,
+      kGoalNameKey: translations.macroGoalName,
     };
 
     return TextFormField(

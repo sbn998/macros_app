@@ -39,6 +39,9 @@ void updateStringValue(
     case kServingNameKey:
       mapToUpdate[kServingNameKey] = newValue;
       break;
+    case kGoalNameKey:
+      mapToUpdate[kGoalNameKey] = newValue;
+      break;
     default:
   }
 }

@@ -11,7 +11,7 @@ import 'package:macros_app/providers/macro_goals_provider.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/buttons/confirm_button_widget.dart';
 import 'package:macros_app/widgets/settings/macro_goals_day_selector.dart';
-import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goal_form_content.dart';
+import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals_normal_dialog/goal_form_content.dart';
 import 'package:macros_app/functions/update_map_values.dart';
 
 class AddGoalModal extends ConsumerStatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:macros_app/constants/enums.dart';
-import 'package:macros_app/widgets/settings/settings_screen/goals_settings/add_goal_modal.dart';
-import 'package:macros_app/widgets/settings/settings_screen/goals_settings/saved_goals_modal.dart';
+import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals_normal_dialog/add_goal_modal.dart';
+import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals_normal_dialog/saved_goals_modal.dart';
 
 class SavedGoalsDialogContent extends StatefulWidget {
   const SavedGoalsDialogContent({super.key});

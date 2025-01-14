@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:macros_app/widgets/settings/settings_screen/goals_settings/saved_goals_dialog_content.dart';
+import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals_normal_dialog/saved_goals_dialog_content.dart';
 
 Future<void> showMacroGoalsDialog(BuildContext context) async {
   if (!context.mounted) {

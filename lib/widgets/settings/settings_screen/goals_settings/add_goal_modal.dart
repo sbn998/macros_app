@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:macros_app/constants/map_entries.dart';
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
 import 'package:macros_app/databases/macro_goals_db.dart';
+import 'package:macros_app/functions/initialize_goal_days_map.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
@@ -24,18 +25,6 @@ class _AddGoalModalState extends ConsumerState<AddGoalModal> {
   late final Map<int, bool> _selectedDays;
   late final GlobalKey<FormState> _formKey;
   late final Map<String, dynamic> _goalValues;
-
-  void _initializeSelectedDays() {
-    _selectedDays = {
-      1: false,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-    };
-  }
 
   void _initializeGoalValues() {
     _goalValues = {
@@ -84,7 +73,7 @@ class _AddGoalModalState extends ConsumerState<AddGoalModal> {
   @override
   void initState() {
     super.initState();
-    _initializeSelectedDays();
+    _selectedDays = initializeGoalDaysMap();
     _formKey = GlobalKey<FormState>();
     _initializeGoalValues();
   }

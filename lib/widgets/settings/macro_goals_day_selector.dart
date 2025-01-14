@@ -33,7 +33,11 @@ class _MacroGoalsDaySelectorState extends State<MacroGoalsDaySelector> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
+      alignment: WrapAlignment.center,
+      runAlignment: WrapAlignment.spaceBetween,
+      spacing: 12.0,
+      runSpacing: 0.5,
       children: [
         for (var day in kWeekdays)
           TextButton(
@@ -45,11 +49,9 @@ class _MacroGoalsDaySelectorState extends State<MacroGoalsDaySelector> {
                 });
               },
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(shortestDay(context, kWeekdays.indexOf(day))),
-                  const SizedBox(
-                    width: 1,
-                  ),
                   Icon(_isDaySelected[day]!
                       ? Icons.check_box
                       : Icons.check_box_outline_blank)

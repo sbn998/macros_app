@@ -1,42 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
-import 'package:macros_app/databases/macro_goals_db.dart';
 import 'package:macros_app/dialogs/settings/settings_macro_goal_details.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
+import 'package:macros_app/providers/macro_goals_provider.dart';
 
-class MacroGoalsListView extends StatefulWidget {
-  final List<MacroGoal> dbMacroGoals;
-
+class MacroGoalsListView extends ConsumerStatefulWidget {
   @override
-  State<MacroGoalsListView> createState() {
+  ConsumerState<MacroGoalsListView> createState() {
     return _MacroGoalsListViewState();
   }
 
   const MacroGoalsListView({
     super.key,
-    required this.dbMacroGoals,
   });
 }
 
-class _MacroGoalsListViewState extends State<MacroGoalsListView> {
-  late List<MacroGoal> _dbMacroGoals;
-
-  @override
-  void initState() {
-    super.initState();
-    _dbMacroGoals = widget.dbMacroGoals;
-  }
-
-  Widget _buildMacroGoalsList() {
+class _MacroGoalsListViewState extends ConsumerState<MacroGoalsListView> {
+  Widget _buildMacroGoalsList(List<MacroGoal> macroGoals) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: _dbMacroGoals.length,
+      itemCount: macroGoals.length,
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            showMacroGoalDetails(context, _dbMacroGoals[index]);
+            showMacroGoalDetails(context, macroGoals[index]);
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -54,7 +44,7 @@ class _MacroGoalsListViewState extends State<MacroGoalsListView> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            _dbMacroGoals[index].goalName,
+                            macroGoals[index].goalName,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -70,14 +60,13 @@ class _MacroGoalsListViewState extends State<MacroGoalsListView> {
                     return IconButton(
                       onPressed: () async {
                         final List<int> intGoalDays =
-                            await getDaysForGoal(_dbMacroGoals[index].id);
-                        await deleteMacroGoal(_dbMacroGoals[index].id);
+                            await getDaysForGoal(macroGoals[index].id);
+                        ref
+                            .read(macroGoalsProvider.notifier)
+                            .removeMacroGoal(macroGoals[index]);
                         for (var int in intGoalDays) {
                           ref.invalidate(fetchedDailyMacrosProvider(int));
                         }
-                        setState(() {
-                          _dbMacroGoals.removeAt(index);
-                        });
                       },
                       icon: const Icon(Icons.delete),
                     );
@@ -93,11 +82,12 @@ class _MacroGoalsListViewState extends State<MacroGoalsListView> {
 
   @override
   Widget build(BuildContext context) {
+    final List<MacroGoal> macroGoals = ref.watch(macroGoalsProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildMacroGoalsList(),
+        _buildMacroGoalsList(macroGoals),
       ],
     );
   }

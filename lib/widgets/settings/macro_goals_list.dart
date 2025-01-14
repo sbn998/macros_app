@@ -43,27 +43,28 @@ class _MacroGoalsListViewState extends State<MacroGoalsListView> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Card(
-                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * .73,
-                    height: 45,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          _dbMacroGoals[index].goalName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Card(
+                    color:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
+                    child: SizedBox(
+                      height: 45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            _dbMacroGoals[index].goalName,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                const Spacer(),
                 Consumer(
                   builder: (context, ref, _) {
                     return IconButton(

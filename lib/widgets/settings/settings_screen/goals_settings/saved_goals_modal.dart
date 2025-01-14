@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:macros_app/databases/macro_goals_db.dart';
-import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/settings/macro_goals_list.dart';
 
@@ -13,33 +11,17 @@ class SavedGoalsModal extends StatelessWidget {
     super.key,
     required this.onTapGoal,
   });
-
-  Future<List<MacroGoal>> _loadMacroGoals() async {
-    return await getMacroGoals();
-  }
-
   @override
   Widget build(BuildContext context) {
     final AppLocalizations translations = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
-    return FutureBuilder(
-        future: _loadMacroGoals(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return contentColumn(translations, theme, snapshot);
-          }
-        });
+    return contentColumn(translations, theme);
   }
 
   Column contentColumn(
     AppLocalizations translations,
     ThemeData theme,
-    AsyncSnapshot<List<MacroGoal>> snapshot,
   ) {
     return Column(
       verticalDirection: VerticalDirection.up,
@@ -57,7 +39,7 @@ class SavedGoalsModal extends StatelessWidget {
           ],
         ),
         addGoalButton(translations, theme),
-        MacroGoalsListView(dbMacroGoals: snapshot.data!),
+        const MacroGoalsListView(),
         const SizedBox(
           height: 25,
         ),

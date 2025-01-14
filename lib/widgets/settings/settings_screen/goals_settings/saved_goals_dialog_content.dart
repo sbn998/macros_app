@@ -31,7 +31,7 @@ class _SavedGoalsDialogContentState extends State<SavedGoalsDialogContent> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: _currentMode == Mode.normal
           ? SavedGoalsModal(onTapGoal: _changeMode)
-          : const AddGoalModal(),
+          : AddGoalModal(onAddedGoal: _changeMode),
     );
   }
 }

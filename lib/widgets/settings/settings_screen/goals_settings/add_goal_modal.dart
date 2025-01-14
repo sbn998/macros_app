@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:macros_app/constants/map_entries.dart';
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
-import 'package:macros_app/databases/macro_goals_db.dart';
 import 'package:macros_app/functions/initialize_goal_days_map.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
+import 'package:macros_app/providers/macro_goals_provider.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/buttons/confirm_button_widget.dart';
 import 'package:macros_app/widgets/settings/macro_goals_day_selector.dart';
@@ -15,7 +15,12 @@ import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goal_
 import 'package:macros_app/functions/update_map_values.dart';
 
 class AddGoalModal extends ConsumerStatefulWidget {
-  const AddGoalModal({super.key});
+  final Function() onAddedGoal;
+
+  const AddGoalModal({
+    super.key,
+    required this.onAddedGoal,
+  });
 
   @override
   ConsumerState<AddGoalModal> createState() => _AddGoalModalState();
@@ -57,7 +62,7 @@ class _AddGoalModalState extends ConsumerState<AddGoalModal> {
         fats: _goalValues[kFatsKey],
       );
 
-      await insertMacroGoal(newMacroGoal);
+      ref.read(macroGoalsProvider.notifier).addMacroGoal(newMacroGoal);
 
       for (var entry in _selectedDays.entries) {
         if (entry.value) {
@@ -66,7 +71,7 @@ class _AddGoalModalState extends ConsumerState<AddGoalModal> {
         }
       }
 
-      Navigator.of(context).pop();
+      widget.onAddedGoal();
     }
   }
 

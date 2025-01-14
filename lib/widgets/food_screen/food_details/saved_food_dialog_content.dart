@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:macros_app/constants/enums.dart';
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/widgets/food_screen/food_details/editing_food_modal.dart';

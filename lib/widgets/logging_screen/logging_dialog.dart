@@ -88,21 +88,16 @@ class _LoggingDialogState extends ConsumerState<LoggingDialog> {
           : Text(translations.selectMeal, textAlign: TextAlign.center),
       content: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.8,
-          ),
-          child: SizedBox(
-            width: double.maxFinite,
-            child: _isMealSelected
-                ? LogFoodList(loggedFood: _selectedFood)
-                : MealSelector(onTapMeal: (userMeal) {
-                    setState(() {
-                      _selectedUserMeal = userMeal;
-                      _isMealSelected = !_isMealSelected;
-                    });
-                  }),
-          ),
+        child: SizedBox(
+          width: double.maxFinite,
+          child: _isMealSelected
+              ? LogFoodList(loggedFood: _selectedFood)
+              : MealSelector(onTapMeal: (userMeal) {
+                  setState(() {
+                    _selectedUserMeal = userMeal;
+                    _isMealSelected = !_isMealSelected;
+                  });
+                }),
         ),
       ),
       actionsPadding: const EdgeInsets.only(

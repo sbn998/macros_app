@@ -28,7 +28,7 @@ class DetailsField extends StatelessWidget {
 
   Text textName() {
     return Text(
-      '${capitalizeFirstLetter(fieldName)}:',
+      '$fieldName:',
       style: const TextStyle(
         fontSize: 19,
         fontWeight: FontWeight.bold,

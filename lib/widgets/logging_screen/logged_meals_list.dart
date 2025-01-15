@@ -37,7 +37,35 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
         .updateLoggedMeal(selectedDate, secondMeal);
   }
 
-  Widget _buildLogMealButton(BuildContext context) {
+  DragTarget<LoggedFood> _dragTarget(List<LoggedMeal> loggedMeals, int index) {
+    return DragTarget<LoggedFood>(
+      onAcceptWithDetails: (draggedFood) {
+        late int originMealIndex;
+        for (var meal in loggedMeals) {
+          if (meal.loggedFood.remove(draggedFood.data)) {
+            originMealIndex = loggedMeals.indexOf(meal);
+          }
+        }
+        loggedMeals[index].loggedFood.add(draggedFood.data);
+        ref
+            .read(loggedMealProviderFamily(loggedMeals[index]).notifier)
+            .addFood(draggedFood.data);
+        ref
+            .read(
+                loggedMealProviderFamily(loggedMeals[originMealIndex]).notifier)
+            .removeFood(draggedFood.data);
+        _updateMealInDatabase(loggedMeals[index], loggedMeals[originMealIndex]);
+      },
+      builder: (context, candidateData, rejectedData) {
+        return LoggedMealWidget(
+          key: Key(ref.read(selectedDateProvider.notifier).state.toString()),
+          loggedMeal: loggedMeals[index],
+        );
+      },
+    );
+  }
+
+  Widget _logMealButton(BuildContext context) {
     return TextButton(
       onPressed: () {
         showAddMealDialog(context, null, null);
@@ -52,7 +80,7 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
     );
   }
 
-  Widget _buildMacrosHeader(
+  Widget _macrosHeader(
     Map<String, dynamic> dailyMacros,
     Map<String, double> loggedMacros,
   ) {
@@ -89,7 +117,7 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildMacrosHeader(dailyMacros, calculatedMacros),
+            _macrosHeader(dailyMacros, calculatedMacros),
             Expanded(
               child: ListView(
                 children: [
@@ -101,45 +129,14 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
                       controller: _scrollController,
                       itemCount: loggedMeals.length,
                       itemBuilder: (context, index) {
-                        return DragTarget<LoggedFood>(
-                          onAcceptWithDetails: (draggedFood) {
-                            late int originMealIndex;
-                            for (var meal in loggedMeals) {
-                              if (meal.loggedFood.remove(draggedFood.data)) {
-                                originMealIndex = loggedMeals.indexOf(meal);
-                              }
-                            }
-                            loggedMeals[index].loggedFood.add(draggedFood.data);
-                            ref
-                                .read(
-                                    loggedMealProviderFamily(loggedMeals[index])
-                                        .notifier)
-                                .addFood(draggedFood.data);
-                            ref
-                                .read(loggedMealProviderFamily(
-                                        loggedMeals[originMealIndex])
-                                    .notifier)
-                                .removeFood(draggedFood.data);
-                            _updateMealInDatabase(loggedMeals[index],
-                                loggedMeals[originMealIndex]);
-                          },
-                          builder: (context, candidateData, rejectedData) {
-                            return LoggedMealWidget(
-                              key: Key(ref
-                                  .read(selectedDateProvider.notifier)
-                                  .state
-                                  .toString()),
-                              loggedMeal: loggedMeals[index],
-                            );
-                          },
-                        );
+                        return _dragTarget(loggedMeals, index);
                       },
                     ),
                   ),
                 ],
               ),
             ),
-            _buildLogMealButton(context),
+            _logMealButton(context),
           ],
         );
       },

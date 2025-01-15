@@ -55,22 +55,18 @@ class _MacroGoalsListViewState extends ConsumerState<MacroGoalsListView> {
                     ),
                   ),
                 ),
-                Consumer(
-                  builder: (context, ref, _) {
-                    return IconButton(
-                      onPressed: () async {
-                        final List<int> intGoalDays =
-                            await getDaysForGoal(macroGoals[index].id);
-                        ref
-                            .read(macroGoalsProvider.notifier)
-                            .removeMacroGoal(macroGoals[index]);
-                        for (var int in intGoalDays) {
-                          ref.invalidate(fetchedDailyMacrosProvider(int));
-                        }
-                      },
-                      icon: const Icon(Icons.delete),
-                    );
+                IconButton(
+                  onPressed: () async {
+                    final List<int> intGoalDays =
+                        await getDaysForGoal(macroGoals[index].id);
+                    ref
+                        .read(macroGoalsProvider.notifier)
+                        .removeMacroGoal(macroGoals[index]);
+                    for (var int in intGoalDays) {
+                      ref.invalidate(fetchedDailyMacrosProvider(int));
+                    }
                   },
+                  icon: const Icon(Icons.delete),
                 ),
               ],
             ),

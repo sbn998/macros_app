@@ -1,1 +1,1 @@
-const kOneDayDuration = Duration(days: 1);
+const Duration kOneDayDuration = Duration(days: 1);

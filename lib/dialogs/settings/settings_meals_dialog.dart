@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:macros_app/databases/user_meals_db.dart';
 import 'package:macros_app/models/user_meal_model.dart';
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
+import 'package:macros_app/widgets/settings/settings_screen/meals_settings/saved_user_meals_dialog_content.dart';
 import 'package:macros_app/widgets/settings/user_meals_list.dart';
 
 Future<void> handleConfirmation(
@@ -43,45 +44,10 @@ Future<void> handleConfirmation(
 }
 
 Future<void> showUserMealsDialog(BuildContext context) async {
-  List<UserMeal> dbUserMeals = await getUserMeals();
-  List<UserMeal> callbackList =
-      dbUserMeals.map((meal) => UserMeal.clone(meal)).toList();
-
-  if (!context.mounted) return;
-
   showDialog(
     context: context,
     builder: (context) {
-      return StatefulBuilder(builder: (context, setState) {
-        return AlertDialog(
-          title: Text(
-            AppLocalizations.of(context)!.settingsAddEditMeals,
-            textAlign: TextAlign.center,
-          ),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: UserMealsListView(
-              onChangedMeals: (changedData) {
-                setState(() {
-                  callbackList = changedData;
-                });
-              },
-              userMeals: callbackList,
-            ),
-          ),
-          actions: [
-            const CloseButtonWidget(),
-            TextButton(
-              onPressed: () async {
-                await handleConfirmation(dbUserMeals, callbackList);
-                if (!context.mounted) return;
-                Navigator.of(context).pop();
-              },
-              child: Text(AppLocalizations.of(context)!.buttonsConfirm),
-            ),
-          ],
-        );
-      });
+      return const SavedUserMealsDialogContent();
     },
   );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:macros_app/dialogs/settings/settings_macro_goals_dialog.dart';
 import 'package:macros_app/dialogs/settings/settings_meals_dialog.dart';
 import 'package:macros_app/widgets/settings/settings_screen/settings_inkwell.dart';
 
@@ -28,77 +29,7 @@ class SettingsList extends StatelessWidget {
             ),
             SettingsInkwell(
               onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
-              },
-              settingName: translations.settingsAddEditMeals,
-              icon: Icons.edit,
-            ),
-            SettingsInkwell(
-              onTap: () {
-                showUserMealsDialog(context);
+                showMacroGoalsDialog(context);
               },
               settingName: translations.settingsAddEditGoals,
               icon: Icons.edit,

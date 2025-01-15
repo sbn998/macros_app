@@ -1,47 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:macros_app/databases/user_meals_db.dart';
-import 'package:macros_app/models/user_meal_model.dart';
-import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/settings/settings_screen/meals_settings/saved_user_meals_dialog_content.dart';
-import 'package:macros_app/widgets/settings/user_meals_list.dart';
-
-Future<void> handleConfirmation(
-  List<UserMeal> dbUserMeals,
-  List<UserMeal> callbackList,
-) async {
-  if (callbackList.isEmpty) {
-    await deleteAllUserMeals();
-    return;
-  }
-
-  List<UserMeal> updatedUserMeals = callbackList
-      .where((updatedUserMeal) => dbUserMeals.any((dbUserMeal) =>
-          dbUserMeal.id == updatedUserMeal.id &&
-          dbUserMeal.mealName != updatedUserMeal.mealName))
-      .toList();
-  List<UserMeal> addedUserMeals = callbackList
-      .where((updatedUserMeal) =>
-          !dbUserMeals.any((dbUserMeal) => dbUserMeal.id == updatedUserMeal.id))
-      .toList();
-  List<UserMeal> removedUserMeals = dbUserMeals
-      .where((dbUserMeal) => !callbackList
-          .any((updatedUserMeal) => updatedUserMeal.id == dbUserMeal.id))
-      .toList();
-
-  for (var userMeal in updatedUserMeals) {
-    await updateUserMeal(userMeal);
-  }
-
-  for (var userMeal in addedUserMeals) {
-    await insertUserMeal(userMeal);
-  }
-
-  for (var userMeal in removedUserMeals) {
-    await deleteUserMeal(userMeal.id);
-  }
-}
 
 Future<void> showUserMealsDialog(BuildContext context) async {
   showDialog(

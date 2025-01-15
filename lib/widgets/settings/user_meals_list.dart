@@ -83,7 +83,7 @@ class _UserMealsListViewState extends ConsumerState<UserMealsListView> {
       );
     }
 
-    Widget addUserMealContent() {
+    Widget addUserMealButton() {
       return TextButton(
         onPressed: null,
         child: InkWell(
@@ -124,7 +124,7 @@ class _UserMealsListViewState extends ConsumerState<UserMealsListView> {
                 itemBuilder: (context, index) {
                   return Row(
                     children: [
-                      Flexible(child: userMealTextField(index)),
+                      Expanded(child: userMealTextField(index)),
                       IconButton(
                         onPressed: () {
                           ref
@@ -149,7 +149,7 @@ class _UserMealsListViewState extends ConsumerState<UserMealsListView> {
       children: [
         mealsList(),
         const SizedBox(height: 14.0),
-        addUserMealContent(),
+        addUserMealButton(),
       ],
     );
   }

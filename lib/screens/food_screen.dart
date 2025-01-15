@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:macros_app/dialogs/food_screen/add_food_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:macros_app/dialogs/food_screen/add_food_dialog.dart';
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/providers/saved_food_provider.dart';
 import 'package:macros_app/widgets/lists/listview_with_indexes.dart';
@@ -14,7 +14,8 @@ class FoodScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final foodList = ref.watch(savedFoodProvider);
+    final List<Food> foodList = ref.watch(savedFoodProvider);
+    final AppLocalizations translations = AppLocalizations.of(context)!;
 
     if (foodList.isNotEmpty) {
       return const ListviewWithIndexes();
@@ -24,7 +25,7 @@ class FoodScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            AppLocalizations.of(context)!.foodScreen,
+            translations.foodScreen,
           ),
           TextButton(
             onPressed: () {
@@ -33,7 +34,7 @@ class FoodScreen extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppLocalizations.of(context)!.buttonsStartAddingFood),
+                Text(translations.buttonsStartAddingFood),
                 const Icon(Icons.add),
               ],
             ),

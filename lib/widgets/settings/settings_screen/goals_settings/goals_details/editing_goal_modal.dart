@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:macros_app/databases/macro_goals_db.dart';
 import 'package:macros_app/functions/modify_daily_macro_goals_db.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/constants/map_entries.dart';

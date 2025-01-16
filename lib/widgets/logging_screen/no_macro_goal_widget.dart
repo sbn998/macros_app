@@ -4,7 +4,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:macros_app/dialogs/settings/settings_macro_goals_dialog.dart';
 
 class EmptyDailyMacroGoal extends StatelessWidget {
-  const EmptyDailyMacroGoal({super.key});
+  final DateTime? date;
+
+  const EmptyDailyMacroGoal({
+    super.key,
+    required this.date,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,10 @@ class EmptyDailyMacroGoal extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              showMacroGoalsDialog(context);
+              showMacroGoalsDialog(
+                context,
+                date,
+              );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

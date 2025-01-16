@@ -8,6 +8,8 @@ import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 import 'package:macros_app/providers/macro_goals_provider.dart';
 
 class MacroGoalsListView extends ConsumerStatefulWidget {
+  final DateTime? date;
+
   @override
   ConsumerState<MacroGoalsListView> createState() {
     return _MacroGoalsListViewState();
@@ -15,10 +17,26 @@ class MacroGoalsListView extends ConsumerStatefulWidget {
 
   const MacroGoalsListView({
     super.key,
+    required this.date,
   });
 }
 
 class _MacroGoalsListViewState extends ConsumerState<MacroGoalsListView> {
+  Future<void> _selectForDate(MacroGoal goal) async {
+    if (widget.date != null) {
+      if (!context.mounted) {
+        return;
+      }
+
+      await insertDayMacroGoal(widget.date!.weekday, goal.id);
+      ref.invalidate(fetchedDailyMacrosProvider(widget.date!.weekday));
+
+      Navigator.of(context).pop();
+    } else {
+      showMacroGoalDetails(context, goal);
+    }
+  }
+
   Widget _buildMacroGoalsList(List<MacroGoal> macroGoals) {
     return ListView.builder(
       shrinkWrap: true,
@@ -26,7 +44,7 @@ class _MacroGoalsListViewState extends ConsumerState<MacroGoalsListView> {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            showMacroGoalDetails(context, macroGoals[index]);
+            _selectForDate(macroGoals[index]);
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

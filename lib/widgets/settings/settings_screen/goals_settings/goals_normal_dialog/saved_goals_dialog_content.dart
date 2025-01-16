@@ -4,7 +4,12 @@ import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals
 import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals_normal_dialog/saved_goals_modal.dart';
 
 class SavedGoalsDialogContent extends StatefulWidget {
-  const SavedGoalsDialogContent({super.key});
+  final DateTime? date;
+
+  const SavedGoalsDialogContent({
+    super.key,
+    required this.date,
+  });
 
   @override
   State<SavedGoalsDialogContent> createState() {
@@ -30,7 +35,7 @@ class _SavedGoalsDialogContentState extends State<SavedGoalsDialogContent> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: _currentMode == Mode.normal
-          ? SavedGoalsModal(onTapGoal: _changeMode)
+          ? SavedGoalsModal(onTapGoal: _changeMode, date: widget.date)
           : AddGoalModal(onAddedGoal: _changeMode),
     );
   }

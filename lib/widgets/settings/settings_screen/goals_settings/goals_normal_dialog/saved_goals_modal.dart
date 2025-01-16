@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:macros_app/databases/daily_macro_goals_db.dart';
+import 'package:macros_app/models/macro_goal_model.dart';
 
 import 'package:macros_app/widgets/buttons/close_button_widget.dart';
 import 'package:macros_app/widgets/settings/macro_goals_list.dart';
 
 class SavedGoalsModal extends StatelessWidget {
+  final DateTime? date;
   final Function() onTapGoal;
 
   const SavedGoalsModal({
     super.key,
     required this.onTapGoal,
+    required this.date,
   });
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations translations = AppLocalizations.of(context)!;
@@ -39,7 +45,7 @@ class SavedGoalsModal extends StatelessWidget {
           ],
         ),
         addGoalButton(translations, theme),
-        const MacroGoalsListView(),
+        MacroGoalsListView(date: date),
         const SizedBox(
           height: 25,
         ),
@@ -55,27 +61,29 @@ class SavedGoalsModal extends StatelessWidget {
     );
   }
 
-  TextButton addGoalButton(AppLocalizations translations, ThemeData theme) {
-    return TextButton(
-        onPressed: null,
-        child: GestureDetector(
-          onTap: () {
-            onTapGoal();
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                translations.addNewGoal,
-                style:
-                    TextStyle(fontSize: 15.0, color: theme.colorScheme.primary),
-              ),
-              Icon(
-                Icons.add,
-                color: theme.colorScheme.primary,
-              ),
-            ],
-          ),
-        ));
+  Widget addGoalButton(AppLocalizations translations, ThemeData theme) {
+    return Consumer(builder: (context, ref, _) {
+      return TextButton(
+          onPressed: null,
+          child: GestureDetector(
+            onTap: () {
+              onTapGoal();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  translations.addNewGoal,
+                  style: TextStyle(
+                      fontSize: 15.0, color: theme.colorScheme.primary),
+                ),
+                Icon(
+                  Icons.add,
+                  color: theme.colorScheme.primary,
+                ),
+              ],
+            ),
+          ));
+    });
   }
 }

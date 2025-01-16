@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:macros_app/widgets/settings/settings_screen/goals_settings/goals_normal_dialog/saved_goals_dialog_content.dart';
 
-Future<void> showMacroGoalsDialog(BuildContext context) async {
-  if (!context.mounted) {
-    return;
-  }
-
+void showMacroGoalsDialog(BuildContext context, DateTime? date) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -16,7 +12,7 @@ Future<void> showMacroGoalsDialog(BuildContext context) async {
           top: 16,
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        child: const SavedGoalsDialogContent(),
+        child: SavedGoalsDialogContent(date: date),
       );
     },
   );

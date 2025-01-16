@@ -81,7 +81,9 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
         loggedMacros: loggedMacros,
       );
     } else {
-      return const EmptyDailyMacroGoal();
+      return EmptyDailyMacroGoal(
+        date: ref.read(selectedDateProvider.notifier).state,
+      );
     }
   }
 

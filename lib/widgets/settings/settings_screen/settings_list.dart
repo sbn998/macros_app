@@ -29,7 +29,7 @@ class SettingsList extends StatelessWidget {
             ),
             SettingsInkwell(
               onTap: () {
-                showMacroGoalsDialog(context);
+                showMacroGoalsDialog(context, null);
               },
               settingName: translations.settingsAddEditGoals,
               icon: Icons.edit,

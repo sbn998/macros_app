@@ -56,7 +56,7 @@ class _LoggingDialogState extends ConsumerState<LoggingDialog> {
 
     final DateTime date = ref.read(selectedDateProvider.notifier).state;
 
-    if (widget.selectedUserMeal == null && widget.selectedLoggedMeal != null) {
+    if (_selectedUserMeal.id != '' && widget.selectedLoggedMeal == null) {
       final LoggedMeal meal = LoggedMeal(
         loggedUserMeal: _selectedUserMeal,
         loggedFood: _selectedFood,

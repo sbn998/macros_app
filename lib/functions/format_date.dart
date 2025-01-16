@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:macros_app/functions/strings.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'package:macros_app/constants/durations.dart';
@@ -16,7 +17,30 @@ String formatDate(DateTime selectedDate, BuildContext context) {
   } else if (isSameDay(today.add(kOneDayDuration), selectedDate)) {
     return translations.dateTomorrow;
   } else {
-    // Formats as 'January 1'.
-    return DateFormat('MMMM d').format(selectedDate);
+    return formatForLocale(context, selectedDate);
   }
+}
+
+String formatForLocale(BuildContext context, DateTime selectedDate) {
+  String locale = Localizations.localeOf(context).toString();
+
+  String dateFormatPattern;
+
+  if (locale.startsWith('en') || locale.startsWith('zh')) {
+    // Formats as 'January 1'
+    dateFormatPattern = 'MMMM d';
+  } else {
+    // Formats as '1 January'
+    dateFormatPattern = 'd MMMM';
+  }
+
+  final DateFormat dateFormat = DateFormat(dateFormatPattern, locale);
+
+  String formattedDate = dateFormat.format(selectedDate);
+
+  List<String> parts = formattedDate.split(' ');
+  if (parts.isNotEmpty) {
+    parts[1] = parts[1].capitalize(); // Capitalize the month (second part)
+  }
+  return parts.join(' ');
 }

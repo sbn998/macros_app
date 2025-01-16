@@ -3,9 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:macros_app/dialogs/food_screen/add_food_dialog.dart';
-import 'package:macros_app/dialogs/food_screen/details_dialog.dart';
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/providers/saved_food_provider.dart';
+import 'package:macros_app/widgets/lists/listview_with_indexes_content.dart';
 
 class ListviewWithIndexes extends ConsumerStatefulWidget {
   const ListviewWithIndexes({
@@ -19,10 +19,6 @@ class ListviewWithIndexes extends ConsumerStatefulWidget {
 
 class _ListviewWithIndexesState extends ConsumerState<ListviewWithIndexes> {
   final ScrollController _scrollController = ScrollController();
-
-  void _removeFood(Food removedFood) async {
-    await ref.read(savedFoodProvider.notifier).removeSavedFood(removedFood.id);
-  }
 
   @override
   void dispose() {
@@ -58,62 +54,10 @@ class _ListviewWithIndexesState extends ConsumerState<ListviewWithIndexes> {
 
                     bool isNewSection = previousLetter != currentLetter;
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (isNewSection)
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 18,
-                              bottom: 6,
-                              top: 6,
-                            ),
-                            child: Text(
-                              currentLetter,
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    showFoodDetailsDialog(
-                                        context, foodList[index]);
-                                  },
-                                  child: Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 18,
-                                        vertical: 7,
-                                      ),
-                                      child: Text(
-                                        foodList[index].foodName,
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  _removeFood(foodList[index]);
-                                },
-                                icon: const Icon(
-                                  Icons.delete,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    return ListviewWithIndexesContent(
+                      isNewSection: isNewSection,
+                      currentLetter: currentLetter,
+                      food: foodList[index],
                     );
                   },
                 ),

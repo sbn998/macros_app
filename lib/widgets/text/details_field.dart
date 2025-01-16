@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:macros_app/functions/capitalize_first_letter.dart';
-
 class DetailsField extends StatelessWidget {
   final String fieldName;
   final String fieldValue;

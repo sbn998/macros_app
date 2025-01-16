@@ -159,7 +159,8 @@ Future<void> removeLoggedMeal(
   List<dynamic> loggedMeals =
       jsonDecode(result.first[kLoggedMealsKey] as String) as List<dynamic>;
 
-  loggedMeals = loggedMeals.where((loggedMeal) => loggedMeal.id != id).toList();
+  loggedMeals =
+      loggedMeals.where((loggedMeal) => loggedMeal[kIdKey] != id).toList();
 
   final updatedLoggedMealsJson = jsonEncode(loggedMeals);
 

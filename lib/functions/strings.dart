@@ -17,3 +17,10 @@ String macrosLeft(
   final double macrosLeft = dailyMacros[mapKey] - loggedMacros[mapKey]!;
   return '${doubleFormat(macrosLeft, kDecimalPlaces)} / ${doubleFormat(dailyMacros[mapKey]!, kDecimalPlaces)}';
 }
+
+extension CapitalizeString on String {
+  String capitalize() {
+    if (isEmpty) return this;
+    return this[0].toUpperCase() + substring(1);
+  }
+}

@@ -4,6 +4,7 @@ import 'package:macros_app/constants/decimals.dart';
 
 import 'package:macros_app/constants/map_entries.dart';
 import 'package:macros_app/functions/double_length_format.dart';
+import 'package:macros_app/functions/strings.dart';
 import 'package:macros_app/widgets/macros/macros_overview_widget.dart';
 
 class MacrosEatenOverview extends StatelessWidget {
@@ -46,7 +47,7 @@ class MacrosEatenOverview extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            '${doubleFormat(loggedMacros[firstKey]!, kDecimalPlaces)} / ${doubleFormat(dailyMacros[firstKey]!, kDecimalPlaces)}',
+            macrosHeaderText(loggedMacros, dailyMacros, firstKey),
           ),
           const SizedBox(
             height: 30,
@@ -62,7 +63,7 @@ class MacrosEatenOverview extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            '${doubleFormat(loggedMacros[secondKey]!, kDecimalPlaces)} / ${doubleFormat(dailyMacros[secondKey]!, kDecimalPlaces)}',
+            macrosHeaderText(loggedMacros, dailyMacros, secondKey),
           ),
         ],
       );

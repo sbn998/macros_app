@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:macros_app/functions/format_date.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'package:macros_app/constants/date_times.dart';
@@ -47,14 +48,20 @@ class CustomTableCalendar extends ConsumerWidget {
         lastDay: kLastCalendarYear,
         currentDay: selectedDate,
         calendarFormat: CalendarFormat.month,
-        headerStyle: const HeaderStyle(
+        headerStyle: HeaderStyle(
           titleCentered: true,
           formatButtonVisible: false,
+          titleTextFormatter: (date, _) {
+            return formatCalendarTitle(context, date);
+          },
         ),
         calendarStyle: const CalendarStyle(
           weekendTextStyle: TextStyle(),
           outsideDaysVisible: false,
         ),
+        daysOfWeekStyle: DaysOfWeekStyle(dowTextFormatter: (day, _) {
+          return formatCalendarDays(context, day);
+        }),
         calendarBuilders: _calendarBuilder(markedDatesAsync.value),
         onDaySelected: (tappedDay, focusedDay) {
           if (!isSameDay(tappedDay, selectedDate)) {

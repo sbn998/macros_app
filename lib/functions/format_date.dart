@@ -44,3 +44,23 @@ String formatForLocale(BuildContext context, DateTime selectedDate) {
   }
   return parts.join(' ');
 }
+
+String formatCalendarTitle(BuildContext context, DateTime displayedMonth) {
+  String locale = Localizations.localeOf(context).toString();
+
+  final DateFormat dateFormat = DateFormat('MMMM yyyy', locale);
+
+  String formattedDate = dateFormat.format(displayedMonth);
+
+  List<String> parts = formattedDate.split(' ');
+  if (parts.isNotEmpty) {
+    parts[0] = parts[0].capitalize(); // Capitalize the month (second part)
+  }
+  return parts.join(' ');
+}
+
+String formatCalendarDays(BuildContext context, DateTime day) {
+  final String locale = Localizations.localeOf(context).toString();
+  final DateFormat dateFormat = DateFormat('EEE', locale);
+  return dateFormat.format(day).capitalize();
+}

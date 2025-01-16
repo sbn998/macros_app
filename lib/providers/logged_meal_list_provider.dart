@@ -10,7 +10,7 @@ class LoggedMealNotifier extends StateNotifier<LoggedMeal> {
   void addFood(LoggedFood food) {
     state = LoggedMeal(
       id: state.id,
-      loggedFood: [...state.loggedFood, food], // Create a new list
+      loggedFood: [...state.loggedFood, food],
       loggedUserMeal: state.loggedUserMeal,
     );
   }

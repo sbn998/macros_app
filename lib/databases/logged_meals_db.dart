@@ -144,7 +144,7 @@ Future<void> removeLoggedMeal(
   String id,
 ) async {
   final Database db = await getDatabase();
-  final String formattedDate = DateFormat('yyyy/MM//dd').format(date);
+  final String formattedDate = DateFormat('yyyy/MM/dd').format(date);
 
   final result = await db.query(
     kLoggedMealsTable,

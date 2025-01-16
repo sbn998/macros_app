@@ -5,8 +5,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:macros_app/dialogs/logging_food/add_meal_dialog.dart';
 import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
+import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/providers/logged_meal_list_provider.dart';
 import 'package:macros_app/functions/macros_summary.dart';
+import 'package:macros_app/providers/logged_meals_provider.dart';
 import 'package:macros_app/widgets/meals/draggable_logged_food.dart';
 
 class LoggedMealWidget extends StatelessWidget {
@@ -23,14 +25,28 @@ class LoggedMealWidget extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Needed to center the text. Has to match the size of the IconButton.
-          const SizedBox(width: 48),
+          // Needed to center the text. Has to match the size of the IconButton(s).
+          const SizedBox(width: 96),
           Expanded(
             child: Text(
               mealName,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
+          ),
+          Consumer(
+            builder: (context, ref, _) {
+              return IconButton(
+                onPressed: () {
+                  final DateTime selectedDate =
+                      ref.read(selectedDateProvider.notifier).state;
+                  ref
+                      .read(loggedMealsProvider(selectedDate).notifier)
+                      .removeLoggedMeal(selectedDate, loggedMeal.id);
+                },
+                icon: const Icon(Icons.delete),
+              );
+            },
           ),
           IconButton(
             onPressed: () {

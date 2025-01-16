@@ -92,21 +92,24 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
           children: [
             const MacrosHeader(),
             Expanded(
-              child: ListView(
-                children: [
-                  Scrollbar(
-                    controller: _scrollController,
-                    thumbVisibility: true,
-                    child: ListView.builder(
-                      shrinkWrap: true,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListView(
+                  children: [
+                    Scrollbar(
                       controller: _scrollController,
-                      itemCount: loggedMeals.length,
-                      itemBuilder: (context, index) {
-                        return _dragTarget(loggedMeals, index);
-                      },
+                      thumbVisibility: true,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        controller: _scrollController,
+                        itemCount: loggedMeals.length,
+                        itemBuilder: (context, index) {
+                          return _dragTarget(loggedMeals, index);
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             _logMealButton(context),

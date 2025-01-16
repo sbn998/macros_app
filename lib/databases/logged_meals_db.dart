@@ -170,3 +170,45 @@ Future<void> removeLoggedMeal(
     whereArgs: [formattedDate],
   );
 }
+
+Future<void> draggedMealsTransactionUpdate(
+    DateTime date, LoggedMeal meal, LoggedMeal secondMeal) async {
+  final Database db = await getDatabase();
+  final String formattedDate = DateFormat('yyyy/MM/dd').format(date);
+
+  await db.transaction((txn) async {
+    final result = await txn.query(
+      kLoggedMealsTable,
+      where: 'day = ?',
+      whereArgs: [formattedDate],
+    );
+
+    if (result.isEmpty) {
+      throw Exception('No meals found for the given day: $formattedDate');
+    }
+
+    List<dynamic> loggedMeals =
+        jsonDecode(result.first[kLoggedMealsKey] as String) as List<dynamic>;
+
+    _updateMealInList(loggedMeals, meal);
+    _updateMealInList(loggedMeals, secondMeal);
+
+    String updatedMealsJson = jsonEncode(loggedMeals);
+
+    await txn.update(
+      kLoggedMealsTable,
+      {kLoggedMealsKey: updatedMealsJson},
+      where: 'day = ?',
+      whereArgs: [formattedDate],
+    );
+  });
+}
+
+void _updateMealInList(List<dynamic> meals, LoggedMeal updatedMeal) {
+  for (int i = 0; i < meals.length; i++) {
+    if (meals[i][kIdKey] == updatedMeal.id) {
+      meals[i] = updatedMeal.toMap();
+      return;
+    }
+  }
+}

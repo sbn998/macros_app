@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
+import 'package:sqflite/sqflite.dart';
 
+import 'package:macros_app/databases/initialize_db.dart';
 import 'package:macros_app/dialogs/logging_food/add_meal_dialog.dart';
 import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/providers/calculated_macros_provider.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 import 'package:macros_app/providers/date_provider.dart';
-import 'package:macros_app/providers/logged_meal_list_provider.dart';
 import 'package:macros_app/providers/logged_meals_provider.dart';
 import 'package:macros_app/widgets/logging_screen/macros_eaten_overview.dart';
 import 'package:macros_app/widgets/logging_screen/no_macro_goal_widget.dart';
@@ -27,14 +29,12 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
   final ScrollController _scrollController = ScrollController();
   late AppLocalizations _translations;
 
-  void _updateMealInDatabase(LoggedMeal meal, LoggedMeal secondMeal) async {
+  void _updateMealInDatabase(LoggedMeal meal, LoggedMeal secondMeal) {
     final selectedDate = ref.read(selectedDateProvider.notifier).state;
-    await ref
+
+    ref
         .read(loggedMealsProvider(selectedDate).notifier)
-        .updateLoggedMeal(selectedDate, meal);
-    await ref
-        .read(loggedMealsProvider(selectedDate).notifier)
-        .updateLoggedMeal(selectedDate, secondMeal);
+        .draggedFoodUpdate(selectedDate, meal, secondMeal);
   }
 
   DragTarget<LoggedFood> _dragTarget(List<LoggedMeal> loggedMeals, int index) {
@@ -46,19 +46,13 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
             originMealIndex = loggedMeals.indexOf(meal);
           }
         }
-        loggedMeals[index].loggedFood.add(draggedFood.data);
-        ref
-            .read(loggedMealProviderFamily(loggedMeals[index]).notifier)
-            .addFood(draggedFood.data);
-        ref
-            .read(
-                loggedMealProviderFamily(loggedMeals[originMealIndex]).notifier)
-            .removeFood(draggedFood.data);
+        setState(() {
+          loggedMeals[index].loggedFood.add(draggedFood.data);
+        });
         _updateMealInDatabase(loggedMeals[index], loggedMeals[originMealIndex]);
       },
       builder: (context, candidateData, rejectedData) {
         return LoggedMealWidget(
-          key: Key(ref.read(selectedDateProvider.notifier).state.toString()),
           loggedMeal: loggedMeals[index],
         );
       },

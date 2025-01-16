@@ -1,7 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
+import 'package:macros_app/constants/table_names.dart';
+import 'package:macros_app/databases/initialize_db.dart';
+import 'package:macros_app/constants/map_entries.dart';
 import 'package:macros_app/databases/logged_meals_db.dart' as db;
 import 'package:macros_app/models/logged_meal_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 class LoggedMealsNotifier extends StateNotifier<List<LoggedMeal>> {
   DateTime date;
@@ -27,6 +34,12 @@ class LoggedMealsNotifier extends StateNotifier<List<LoggedMeal>> {
 
   Future<void> removeLoggedMeal(DateTime date, String id) async {
     await db.removeLoggedMeal(date, id);
+    _loadLoggedMeals(date);
+  }
+
+  Future<void> draggedFoodUpdate(
+      DateTime date, LoggedMeal meal, LoggedMeal secondMeal) async {
+    await db.draggedMealsTransactionUpdate(date, meal, secondMeal);
     _loadLoggedMeals(date);
   }
 }

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:macros_app/constants/decimals.dart';
 
 import 'package:macros_app/constants/map_entries.dart';
-import 'package:macros_app/functions/double_length_format.dart';
 import 'package:macros_app/functions/strings.dart';
 import 'package:macros_app/widgets/macros/macros_overview_widget.dart';
 
 class MacrosEatenOverview extends StatelessWidget {
   final Map<String, dynamic> dailyMacros;
   final Map<String, double> loggedMacros;
+  final bool isLeft;
 
   const MacrosEatenOverview({
     super.key,
     required this.dailyMacros,
     required this.loggedMacros,
+    required this.isLeft,
   });
 
   @override
@@ -47,7 +47,9 @@ class MacrosEatenOverview extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            macrosHeaderText(loggedMacros, dailyMacros, firstKey),
+            isLeft
+                ? macrosLeft(loggedMacros, dailyMacros, firstKey)
+                : macrosHeaderText(loggedMacros, dailyMacros, firstKey),
           ),
           const SizedBox(
             height: 30,
@@ -63,7 +65,9 @@ class MacrosEatenOverview extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            macrosHeaderText(loggedMacros, dailyMacros, secondKey),
+            isLeft
+                ? macrosLeft(loggedMacros, dailyMacros, secondKey)
+                : macrosHeaderText(loggedMacros, dailyMacros, secondKey),
           ),
         ],
       );

@@ -5,12 +5,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:macros_app/dialogs/logging_food/add_meal_dialog.dart';
 import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
-import 'package:macros_app/providers/calculated_macros_provider.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
 import 'package:macros_app/providers/date_provider.dart';
 import 'package:macros_app/providers/logged_meals_provider.dart';
-import 'package:macros_app/widgets/logging_screen/macros_eaten_overview.dart';
-import 'package:macros_app/widgets/logging_screen/no_macro_goal_widget.dart';
+import 'package:macros_app/widgets/logging_screen/macros_header.dart';
 import 'package:macros_app/widgets/meals/logged_meal.dart';
 
 class LoggedMealsList extends ConsumerStatefulWidget {
@@ -71,22 +69,6 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
     );
   }
 
-  Widget _macrosHeader(
-    Map<String, dynamic> dailyMacros,
-    Map<String, double> loggedMacros,
-  ) {
-    if (dailyMacros.isNotEmpty) {
-      return MacrosEatenOverview(
-        dailyMacros: dailyMacros,
-        loggedMacros: loggedMacros,
-      );
-    } else {
-      return EmptyDailyMacroGoal(
-        date: ref.read(selectedDateProvider.notifier).state,
-      );
-    }
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
@@ -102,15 +84,13 @@ class _LoggedMealsListState extends ConsumerState<LoggedMealsList> {
         ref.watch(loggedMealsProvider(dateToFetch));
     final dailyMacros =
         ref.watch(fetchedDailyMacrosProvider(dateToFetch.weekday));
-    final Map<String, double> calculatedMacros =
-        ref.watch(calculatedMacrosProvider);
 
     return dailyMacros.when(
       data: (dailyMacros) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _macrosHeader(dailyMacros, calculatedMacros),
+            const MacrosHeader(),
             Expanded(
               child: ListView(
                 children: [

@@ -5,8 +5,8 @@ const int kMinServingNameLength = 0;
 const int kMaxServingNameLength = 5;
 
 const int kMinGoalNameLength = 2;
-const int kMaxGoalNameLength = 20;
+const int kMaxGoalNameLength = 30;
 
-const int kMaxCaloriesLength = 5;
-const int kMaxMacroLength = 3;
-const int kMaxServingQuantityLength = 4;
+const int kMaxCaloriesLength = 6;
+const int kMaxMacroLength = 6;
+const int kMaxServingQuantityLength = 5;

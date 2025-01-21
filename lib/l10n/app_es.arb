@@ -1,0 +1,87 @@
+{
+  "@note": {
+    "description": "Mensajes misceláneos."
+  },
+  "addFood": "Añade alimentos",
+  "foodName": "Nombre del alimento",
+  "selectFood": "Selecciona tus alimentos",
+  "selectMeal": "Selecciona tu comida",
+  "yourMacroGoals": "Tus macro-metas",
+  "addNewGoal": "Añade una nueva meta",
+  "addEditMeals": "Añade o Edita tus comidas",
+  "foodScreen": "Esta es la ventana de los Alimentos",
+  "error": "Error",
+  "noGoals": "No hay metas para el día",
+  "totalSummary": "Total:       ",
+  "enterMealName": "Introduce el nombre de la comida",
+  "addMeal": "Añade una comida",
+
+  "@note": {
+    "description": "Traducciones para la ventana de opciones."
+  },
+  "settingsAddEditMeals": "Añade/Edita tus comidas",
+  "settingsAddEditGoals": "Añade/Edita tus metas",
+
+  "@note": {
+    "description": "Sección para los campos de texto."
+  },
+  "macroGoalName": "Nombre de la Macro-meta",
+
+  "@note": {
+    "description": "Sección para las etiquetas."
+  },
+  "labelsYourFood": "Tus Alimentos",
+  "labelsMeals": "Comidas",
+  "labelsSettings": "Opciones",
+
+  "@note": {
+    "description": "Sección para los botones."
+  },
+  "buttonsClose": "Cerrar",
+  "buttonsConfirm": "Confirmar",
+  "buttonsCancel": "Cancelar",
+  "buttonsConfirmChanges": "Confirmar cambios",
+  "buttonsStartAddingFood": "Empieza a añadir alimentos",
+  "buttonsStartAddingGoal": "Empieza añadiendo una!",
+  "buttonsLogMeal": "Anota tus comidas!",
+  "buttonsAddFoodExclamation": "Añade alimentos!",
+
+  "@note": {
+    "description": "Traducciones relacionadas con las fechas."
+  },
+  "dateToday": "Hoy",
+  "dateTomorrow": "Mañana",
+  "dateYesterday": "Ayer",
+  "daysShortestMonday": "L",
+  "daysShortestTuesday": "M",
+  "daysShortestWednesday": "X",
+  "daysShortestThursday": "J",
+  "daysShortestFriday": "V",
+  "daysShortestSaturday": "S",
+  "daysShortestSunday": "D",
+
+  "@note": {
+    "description": "Traducciones para los títulos de las ventanas."
+  },
+  "screensYourFood": "Tus Alimentos",
+  "screensSettings": "Opciones",
+
+  "@note": {
+    "description": "Sección para las macros."
+  },
+  "calories": "Calorías",
+  "protein": "Proteína",
+  "carbs": "Carbohidratos",
+  "fats": "Grasas",
+  "servingQuantity": "Tamaño de la porción",
+  "servingName": "Nombre de la porción",
+
+  "@note": {
+    "description": "Sección para la validación de mensajes."
+  },
+  "nullServingName": "Por favor, introduzca las unidades de su porción",
+  "nullFoodName": "Por favor, introduzca un nombre.",
+  "shortFoodName": "El nombre debe contener al menos 3 caracteres.",
+  "longFoodName": "El nombre debe contener menos de 40 caracteres.",
+  "invalidDouble": "Por favor, introduzca un número válido."
+}

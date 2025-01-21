@@ -1,3 +1,4 @@
+import 'package:macros_app/constants/map_entries.dart';
 import 'package:uuid/uuid.dart';
 
 const _uuid = Uuid();
@@ -18,15 +19,15 @@ class UserMeal {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'meal_name': mealName,
+      kIdKey: id,
+      kMealNameKey: mealName,
     };
   }
 
   static UserMeal fromMap(Map<String, dynamic> mapValues) {
     return UserMeal(
-      id: mapValues['id'] as String,
-      mealName: mapValues['meal_name'] as String,
+      id: mapValues[kIdKey] as String,
+      mealName: mapValues[kMealNameKey] as String,
     );
   }
 

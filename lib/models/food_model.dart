@@ -1,5 +1,8 @@
 import 'package:uuid/uuid.dart';
 
+import 'package:macros_app/constants/strings.dart';
+import 'package:macros_app/constants/map_entries.dart';
+
 const _uuid = Uuid();
 
 class Food {
@@ -26,44 +29,44 @@ class Food {
         protein = (protein ?? 0.0).toDouble(),
         carbs = (carbs ?? 0.0).toDouble(),
         fats = (fats ?? 0.0).toDouble(),
-        serving = serving ?? 'g',
+        serving = serving ?? kDefaultServingName,
         servingQuantity = (servingQuantity ?? 100.0).toDouble();
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'food_name': foodName,
-      'calories': calories,
-      'protein': protein,
-      'carbs': carbs,
-      'fats': fats,
-      'serving': serving,
-      'serving_quantity': servingQuantity,
+      kIdKey: id,
+      kFoodNameKey: foodName,
+      kCaloriesKey: calories,
+      kProteinKey: protein,
+      kCarbsKey: carbs,
+      kFatsKey: fats,
+      kServingNameKey: serving,
+      kServingQuantityKey: servingQuantity,
     };
   }
 
   static Food fromMap(Map<String, dynamic> mapValues) {
     return Food(
-      foodName: mapValues['food_name'] as String,
-      calories: (mapValues['calories'] as num?)?.toDouble() ?? 0.0,
-      protein: (mapValues['protein'] as num?)?.toDouble() ?? 0.0,
-      carbs: (mapValues['carbs'] as num?)?.toDouble() ?? 0.0,
-      fats: (mapValues['fats'] as num?)?.toDouble() ?? 0.0,
-      serving: mapValues['serving'] as String,
+      foodName: mapValues[kIdKey] as String,
+      calories: (mapValues[kCaloriesKey] as num?)?.toDouble() ?? 0.0,
+      protein: (mapValues[kProteinKey] as num?)?.toDouble() ?? 0.0,
+      carbs: (mapValues[kCarbsKey] as num?)?.toDouble() ?? 0.0,
+      fats: (mapValues[kFatsKey] as num?)?.toDouble() ?? 0.0,
+      serving: mapValues[kServingNameKey] as String,
       servingQuantity:
-          (mapValues['serving_quantity'] as num?)?.toDouble() ?? 0.0,
+          (mapValues[kServingQuantityKey] as num?)?.toDouble() ?? 0.0,
     );
   }
 
   void updateFoodFromMap(Map<String, dynamic> newValues) {
-    foodName = newValues['food_name'] as String? ?? foodName;
-    calories = (newValues['calories'] as num?)?.toDouble() ?? calories;
-    protein = (newValues['protein'] as num?)?.toDouble() ?? protein;
-    carbs = (newValues['carbs'] as num?)?.toDouble() ?? carbs;
-    fats = (newValues['fats'] as num?)?.toDouble() ?? fats;
-    serving = newValues['serving'] as String? ?? serving;
+    foodName = newValues[kFoodNameKey] as String? ?? foodName;
+    calories = (newValues[kCaloriesKey] as num?)?.toDouble() ?? calories;
+    protein = (newValues[kProteinKey] as num?)?.toDouble() ?? protein;
+    carbs = (newValues[kCarbsKey] as num?)?.toDouble() ?? carbs;
+    fats = (newValues[kFatsKey] as num?)?.toDouble() ?? fats;
+    serving = newValues[kServingNameKey] as String? ?? serving;
     servingQuantity =
-        (newValues['serving_quantity'] as num?)?.toDouble() ?? servingQuantity;
+        (newValues[kServingQuantityKey] as num?)?.toDouble() ?? servingQuantity;
   }
 
   @override

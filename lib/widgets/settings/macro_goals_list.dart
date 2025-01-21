@@ -1,82 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:macros_app/databases/daily_macro_goals_db.dart';
-import 'package:macros_app/databases/macro_goals_db.dart';
 import 'package:macros_app/dialogs/settings/settings_macro_goal_details.dart';
 import 'package:macros_app/models/macro_goal_model.dart';
 import 'package:macros_app/providers/daily_macro_goals_provider.dart';
+import 'package:macros_app/providers/macro_goals_provider.dart';
 
-class MacroGoalsListView extends StatefulWidget {
-  final List<MacroGoal> dbMacroGoals;
-  final WidgetRef ref;
+class MacroGoalsListView extends ConsumerStatefulWidget {
+  final DateTime? date;
 
   @override
-  State<MacroGoalsListView> createState() {
+  ConsumerState<MacroGoalsListView> createState() {
     return _MacroGoalsListViewState();
   }
 
   const MacroGoalsListView({
     super.key,
-    required this.dbMacroGoals,
-    required this.ref,
+    required this.date,
   });
 }
 
-class _MacroGoalsListViewState extends State<MacroGoalsListView> {
-  late List<MacroGoal> _dbMacroGoals;
+class _MacroGoalsListViewState extends ConsumerState<MacroGoalsListView> {
+  Future<void> _selectForDate(MacroGoal goal) async {
+    if (widget.date != null) {
+      if (!context.mounted) {
+        return;
+      }
 
-  @override
-  void initState() {
-    super.initState();
-    _dbMacroGoals = widget.dbMacroGoals;
+      await insertDayMacroGoal(widget.date!.weekday, goal.id);
+      ref.invalidate(fetchedDailyMacrosProvider(widget.date!.weekday));
+
+      Navigator.of(context).pop();
+    } else {
+      showMacroGoalDetails(context, goal);
+    }
   }
 
-  Widget _buildMacroGoalsList() {
+  Widget _buildMacroGoalsList(List<MacroGoal> macroGoals) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: _dbMacroGoals.length,
+      itemCount: macroGoals.length,
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            showMacroGoalDetails(context, _dbMacroGoals[index]);
+            _selectForDate(macroGoals[index]);
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Card(
-                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * .73,
-                    height: 45,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          _dbMacroGoals[index].goalName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Card(
+                    color:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
+                    child: SizedBox(
+                      height: 45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            macroGoals[index].goalName,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                const Spacer(),
                 IconButton(
                   onPressed: () async {
                     final List<int> intGoalDays =
-                        await getDaysForGoal(_dbMacroGoals[index].id);
-                    await deleteMacroGoal(_dbMacroGoals[index].id);
+                        await getDaysForGoal(macroGoals[index].id);
+                    ref
+                        .read(macroGoalsProvider.notifier)
+                        .removeMacroGoal(macroGoals[index]);
                     for (var int in intGoalDays) {
-                      widget.ref.invalidate(fetchedDailyMacrosProvider(int));
+                      ref.invalidate(fetchedDailyMacrosProvider(int));
                     }
-                    setState(() {
-                      _dbMacroGoals.removeAt(index);
-                    });
                   },
                   icon: const Icon(Icons.delete),
                 ),
@@ -90,11 +96,12 @@ class _MacroGoalsListViewState extends State<MacroGoalsListView> {
 
   @override
   Widget build(BuildContext context) {
+    final List<MacroGoal> macroGoals = ref.watch(macroGoalsProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildMacroGoalsList(),
+        _buildMacroGoalsList(macroGoals),
       ],
     );
   }

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:macros_app/constants/map_entries.dart';
+import 'package:macros_app/constants/table_names.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:macros_app/databases/initialize_db.dart';
@@ -7,19 +9,20 @@ import 'package:macros_app/models/food_model.dart';
 
 Future<List<Food>> getSavedFood() async {
   final db = await getDatabase();
-  final List<Map<String, dynamic>> savedFoodMap = await db.query('saved_food');
+  final List<Map<String, dynamic>> savedFoodMap =
+      await db.query(kSavedFoodTable);
   late List<Food> sortedList;
 
   sortedList = [
     for (final {
-          'id': id as String,
-          'food_name': foodName as String,
-          'calories': calories as double,
-          'protein': protein as double,
-          'carbs': carbs as double,
-          'fats': fats as double,
-          'serving': serving as String,
-          'serving_quantity': servingQuantity as double,
+          kIdKey: id as String,
+          kFoodNameKey: foodName as String,
+          kCaloriesKey: calories as double,
+          kProteinKey: protein as double,
+          kCarbsKey: carbs as double,
+          kFatsKey: fats as double,
+          kServingNameKey: serving as String,
+          kServingQuantityKey: servingQuantity as double,
         } in savedFoodMap)
       Food(
         id: id,
@@ -42,7 +45,7 @@ Future<void> insertSavedFood(Food newFood) async {
   final db = await getDatabase();
 
   await db.insert(
-    'saved_food',
+    kSavedFoodTable,
     newFood.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
@@ -52,7 +55,7 @@ Future<void> updatedSavedFood(Food updatedFood) async {
   final db = await getDatabase();
 
   await db.update(
-    'saved_food',
+    kSavedFoodTable,
     updatedFood.toMap(),
     where: 'id = ?',
     whereArgs: [updatedFood.id],
@@ -63,7 +66,7 @@ Future<void> deleteSavedFood(String id) async {
   final db = await getDatabase();
 
   await db.delete(
-    'saved_food',
+    kSavedFoodTable,
     where: 'id = ?',
     whereArgs: [id],
   );
@@ -72,5 +75,5 @@ Future<void> deleteSavedFood(String id) async {
 Future<void> deleteAllSavedFood() async {
   final db = await getDatabase();
 
-  await db.delete('saved_food');
+  await db.delete(kSavedFoodTable);
 }

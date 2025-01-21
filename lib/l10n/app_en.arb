@@ -1,0 +1,89 @@
+
+{
+  "@note": {
+    "description": "Misc messages like dialog titles."
+  },
+  "addFood": "Add some food",
+  "foodName": "Food name",
+  "selectFood": "Select your food",
+  "selectMeal": "Select your meal",
+  "yourMacroGoals": "Your macro goals",
+  "addNewGoal": "Add a new goal",
+  "addEditMeals": "Add or Edit your meals",
+  "foodScreen": "This is the Food screen",
+  "error": "Error",
+  "noGoals": "No goals for the day",
+  "totalSummary": "Total:       ",
+  "enterMealName": "Enter a meal name",
+  "addMeal": "Add a meal",
+
+  "@note": {
+    "description": "Settings screen translations"
+  },
+  "settingsAddEditMeals": "Add/Edit your meals",
+  "settingsAddEditGoals": "Add/Edit your goals",
+
+  "@note": {
+    "description": "Text fields section."
+  },
+  "macroGoalName": "Macro goal name",
+
+  "@note": {
+    "description": "Labels sections."
+  },
+  "labelsYourFood": "Your Food",
+  "labelsMeals": "Meals",
+  "labelsSettings": "Settings",
+
+  "@note": {
+    "description": "Buttons section."
+  },
+  "buttonsClose": "Close",
+  "buttonsConfirm": "Confirm",
+  "buttonsCancel": "Cancel",
+  "buttonsConfirmChanges": "Confirm changes",
+  "buttonsStartAddingFood": "Start adding food!",
+  "buttonsStartAddingGoal": "Start by adding one",
+  "buttonsLogMeal": "Log your meals!",
+  "buttonsAddFoodExclamation": "Add food!",
+
+  "@note": {
+    "description": "Translations related to dates."
+  },
+  "dateToday": "Today",
+  "dateTomorrow": "Tomorrow",
+  "dateYesterday": "Yesterday",
+  "daysShortestMonday": "M",
+  "daysShortestTuesday": "Tu",
+  "daysShortestWednesday": "W",
+  "daysShortestThursday": "Th",
+  "daysShortestFriday": "F",
+  "daysShortestSaturday": "S",
+  "daysShortestSunday": "U",
+
+  "@note": {
+    "description": "Translations for screen titles"
+  },
+  "screensYourFood": "Your Food",
+  "screensSettings": "Settings",
+
+  "@note": {
+    "description": "Macros section."
+  },
+  "calories": "Calories",
+  "protein": "Protein",
+  "carbs": "Carbohydrates",
+  "fats": "Fats",
+  "servingQuantity": "Serving Quantity",
+  "servingName": "Serving Name",
+
+  "@note": {
+    "description": "Validator messages section."
+  },
+  "nullServingName": "Please insert your serving unit(s).",
+  "nullFoodName": "Please write a name.",
+  "shortFoodName": "Name must be at least 3 characters long.",
+  "longFoodName": "Name must be shorter than 40 characters.",
+  "invalidDouble": "Please enter a valid number."
+}
+

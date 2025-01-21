@@ -29,6 +29,12 @@ class LoggedMealsNotifier extends StateNotifier<List<LoggedMeal>> {
     await db.removeLoggedMeal(date, id);
     _loadLoggedMeals(date);
   }
+
+  Future<void> draggedFoodUpdate(
+      DateTime date, LoggedMeal meal, LoggedMeal secondMeal) async {
+    await db.draggedMealsTransactionUpdate(date, meal, secondMeal);
+    _loadLoggedMeals(date);
+  }
 }
 
 final loggedMealsProvider = StateNotifierProvider.family<LoggedMealsNotifier,

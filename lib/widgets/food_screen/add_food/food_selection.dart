@@ -52,44 +52,41 @@ class _FoodSelectionState extends State<FoodSelection> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  widget.rowFood.foodName,
+                  _loggedFood.foodName,
                   style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 50.0,
-                      child: TextField(
-                        controller: _controller,
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        onChanged: (value) {
-                          widget.addOrRemoveSelectedFood(_loggedFood);
-                          _loggedFood.loggedQuantity =
-                              double.parse(_controller.text);
-                          widget.addOrRemoveSelectedFood(_loggedFood);
-                        },
-                      ),
+                const Spacer(),
+                SizedBox(
+                  width: 50.0,
+                  child: TextField(
+                    controller: _controller,
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
                     ),
-                    Text(
-                      '${widget.rowFood.serving}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 44,
-                      child: _isSelected
-                          ? const Align(
-                              alignment: Alignment.centerRight,
-                              child: Icon(Icons.check))
-                          : null,
-                    ),
-                  ],
+                    onChanged: (value) {
+                      widget.addOrRemoveSelectedFood(_loggedFood);
+                      _loggedFood.loggedQuantity =
+                          double.parse(_controller.text);
+                      widget.addOrRemoveSelectedFood(_loggedFood);
+                    },
+                  ),
+                ),
+                Text(
+                  '${widget.rowFood.serving}',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 33,
+                  child: _isSelected
+                      ? const Align(
+                          alignment: Alignment.centerRight,
+                          child: Icon(Icons.check))
+                      : null,
                 ),
               ],
             ),

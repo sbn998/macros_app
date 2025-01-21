@@ -3,23 +3,26 @@ import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+import 'package:macros_app/constants/table_names.dart';
+import 'package:macros_app/constants/map_entries.dart';
+
 Future<Database> getDatabase() async {
   final database = openDatabase(
     // join() ensures the path is correctly constructed for each platform.
-    join(await getDatabasesPath(), 'macros_app.db'),
+    join(await getDatabasesPath(), kDatabaseName),
     onCreate: (db, version) async {
       await db.execute(
-        'CREATE TABLE user_meals(id TEXT PRIMARY KEY, meal_name TEXT)',
+        'CREATE TABLE $kUserMealsTable($kIdKey TEXT PRIMARY KEY, $kMealNameKey TEXT)',
       );
       await db.execute(
-        'CREATE TABLE saved_food(id TEXT PRIMARY KEY, food_name TEXT, calories REAL, protein REAL, carbs REAL, fats REAL, serving TEXT, serving_quantity REAL)',
+        'CREATE TABLE $kSavedFoodTable($kIdKey TEXT PRIMARY KEY, $kFoodNameKey TEXT, $kCaloriesKey REAL, $kProteinKey REAL, $kCarbsKey REAL, $kFatsKey REAL, $kServingNameKey TEXT, $kServingQuantityKey REAL)',
       );
       await db.execute(
-          'CREATE TABLE logged_meals(day TEXT PRIMARY KEY, logged_meals TEXT)');
+          'CREATE TABLE $kLoggedMealsTable($kDayKey TEXT PRIMARY KEY, $kLoggedMealsKey TEXT)');
       await db.execute(
-          'CREATE TABLE macro_goals(id TEXT PRIMARY KEY, goal_name TEXT, calories REAL, protein REAL, carbs REAL, fats REAL)');
+          'CREATE TABLE $kMacroGoalsTable($kIdKey TEXT PRIMARY KEY, $kGoalNameKey TEXT, $kCaloriesKey REAL, $kProteinKey REAL, $kCarbsKey REAL, $kFatsKey REAL)');
       await db.execute(
-          'CREATE TABLE daily_macro_goals(day INTEGER PRIMARY KEY, macro_goal_id TEXT, FOREIGN KEY (macro_goal_id) REFERENCES macro_goals (id))');
+          'CREATE TABLE $kDailyMacroGoalsTable($kDayKey INTEGER PRIMARY KEY, $kMacroGoalIdKey TEXT, FOREIGN KEY ($kMacroGoalIdKey) REFERENCES $kMacroGoalsKey ($kIdKey))');
     },
     version: 1,
   );

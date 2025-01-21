@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:macros_app/models/user_meal_model.dart';
+import 'package:macros_app/providers/user_meals_provider.dart';
 
 // TODO: Add a Snackbar to undo the action of deleting a user meal.
 
-class UserMealsListView extends StatefulWidget {
-  final Function(List<UserMeal>) onChangedMeals;
-  final List<UserMeal> userMeals;
+class UserMealsListView extends ConsumerStatefulWidget {
+  const UserMealsListView({super.key});
 
   @override
-  State<StatefulWidget> createState() {
+  ConsumerState<UserMealsListView> createState() {
     return _UserMealsListViewState();
   }
-
-  const UserMealsListView({
-    super.key,
-    required this.onChangedMeals,
-    required this.userMeals,
-  });
 }
 
-class _UserMealsListViewState extends State<UserMealsListView> {
-  late List<UserMeal> _userMeals;
+class _UserMealsListViewState extends ConsumerState<UserMealsListView> {
   late List<TextEditingController> _controllers;
+  final ScrollController _scrollController = ScrollController();
+
+  void _initializeLists() {
+    final userMealsList = ref.read(userMealsProvider);
+    setState(() {
+      _controllers = List.generate(userMealsList.length, (index) {
+        return TextEditingController(text: userMealsList[index].mealName);
+      });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    _userMeals = List.from(widget.userMeals);
-    _controllers = List.generate(_userMeals.length, (index) {
-      return TextEditingController(text: _userMeals[index].mealName);
-    });
+    _initializeLists();
   }
 
   @override
@@ -40,115 +43,113 @@ class _UserMealsListViewState extends State<UserMealsListView> {
     super.dispose();
   }
 
-  void _addNewUserMeal() {
-    setState(() {
-      _userMeals.add(
-        UserMeal(mealName: ''),
-      );
-      _controllers.add(
-        TextEditingController(text: ''),
-      );
-    });
-  }
+  @override
+  Widget build(BuildContext context) {
+    final userMealsList = ref.watch(userMealsProvider);
+    final translations = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
 
-  void _removeUserMeal(int index) {
-    setState(() {
-      _controllers.removeAt(index);
-      _userMeals.removeAt(index);
-    });
-    widget.onChangedMeals(_userMeals);
-  }
+    if (_controllers.length != userMealsList.length) {
+      _controllers = List.generate(userMealsList.length, (index) {
+        return TextEditingController(text: userMealsList[index].mealName);
+      });
+    }
 
-  Widget _buildUserMealList() {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: _userMeals.length,
-      itemBuilder: (context, index) {
-        return _buildUserMealRow(index);
-      },
-    );
-  }
-
-  Widget _buildUserMealRow(int index) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Flexible(
-            child: _buildUserMealTextField(index),
-          ),
-          IconButton(
-            onPressed: () {
-              _removeUserMeal(index);
-            },
-            icon: const Icon(Icons.delete),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildUserMealTextField(int index) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: 'Enter a meal name',
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.transparent),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).primaryColor,
+    Widget userMealTextField(int index) {
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: translations.enterMealName,
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: theme.primaryColor,
+                ),
               ),
             ),
+            controller: _controllers[index],
+            onChanged: (value) {
+              userMealsList[index].mealName = value;
+              ref
+                  .read(userMealsProvider.notifier)
+                  .updateUserMeal(userMealsList[index]);
+            },
           ),
-          controller: _controllers[index],
-          onChanged: (value) {
-            _userMeals[index].mealName = value;
-            widget.onChangedMeals(_userMeals);
-          },
         ),
-      ),
-    );
-  }
+      );
+    }
 
-  Widget _buildNewUserMealRow() {
-    return TextButton(
-      onPressed: null,
-      child: GestureDetector(
-        onTap: _addNewUserMeal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+    Widget addUserMealButton() {
+      return TextButton(
+        onPressed: null,
+        child: InkWell(
+          onTap: () {
+            ref
+                .read(userMealsProvider.notifier)
+                .addUserMeal(UserMeal(mealName: ''));
+            setState(() {
+              _controllers.add(TextEditingController(text: ''));
+            });
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                translations.addMeal,
+                style:
+                    TextStyle(fontSize: 15.0, color: theme.colorScheme.primary),
+              ),
+              Icon(Icons.add, color: theme.colorScheme.primary),
+            ],
+          ),
+        ),
+      );
+    }
+
+    Widget mealsList() {
+      return Expanded(
+        child: ListView(
           children: [
-            Text(
-              'Add a meal',
-              style: TextStyle(
-                  fontSize: 15.0, color: Theme.of(context).colorScheme.primary),
-            ),
-            Icon(
-              Icons.add,
-              color: Theme.of(context).colorScheme.primary,
+            Scrollbar(
+              thumbVisibility: true,
+              controller: _scrollController,
+              child: ListView.builder(
+                controller: _scrollController,
+                shrinkWrap: true,
+                itemCount: userMealsList.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      Expanded(child: userMealTextField(index)),
+                      IconButton(
+                        onPressed: () {
+                          ref
+                              .read(userMealsProvider.notifier)
+                              .removeUserMeal(userMealsList[index]);
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ],
         ),
-      ),
-    );
-  }
+      );
+    }
 
-  @override
-  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildUserMealList(),
-        const SizedBox(
-          height: 14.0,
-        ),
-        _buildNewUserMealRow(),
+        mealsList(),
+        const SizedBox(height: 14.0),
+        addUserMealButton(),
       ],
     );
   }

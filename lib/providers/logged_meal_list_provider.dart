@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:macros_app/models/logged_food_model.dart';
 import 'package:macros_app/models/logged_meal_model.dart';
+import 'package:macros_app/constants/map_entries.dart';
 
 class LoggedMealNotifier extends StateNotifier<LoggedMeal> {
   LoggedMealNotifier({required LoggedMeal loggedMeal}) : super(loggedMeal);
@@ -9,7 +10,7 @@ class LoggedMealNotifier extends StateNotifier<LoggedMeal> {
   void addFood(LoggedFood food) {
     state = LoggedMeal(
       id: state.id,
-      loggedFood: [...state.loggedFood, food], // Create a new list
+      loggedFood: [...state.loggedFood, food],
       loggedUserMeal: state.loggedUserMeal,
     );
   }
@@ -20,27 +21,6 @@ class LoggedMealNotifier extends StateNotifier<LoggedMeal> {
       loggedFood: state.loggedFood.where((item) => item != food).toList(),
       loggedUserMeal: state.loggedUserMeal,
     );
-  }
-
-  Map<String, double> calculateMacros() {
-    double kcal = 0.0;
-    double protein = 0.0;
-    double carbs = 0.0;
-    double fats = 0.0;
-
-    for (var food in state.loggedFood) {
-      kcal += food.loggedQuantity * 4; // Assuming 4 kcal per gram of food
-      protein += food.loggedQuantity * 0.25; // Example value
-      carbs += food.loggedQuantity * 0.5; // Example value
-      fats += food.loggedQuantity * 0.2; // Example value
-    }
-
-    return {
-      'kcal': kcal,
-      'protein': protein,
-      'carbs': carbs,
-      'fats': fats,
-    };
   }
 }
 
@@ -71,10 +51,10 @@ class LoggedMealMacrosNotifier extends StateNotifier<Map<String, double>> {
     }
 
     return {
-      'kcal': totalCalories,
-      'protein': totalProtein,
-      'carbs': totalCarbs,
-      'fats': totalFats,
+      kCaloriesKey: totalCalories,
+      kProteinKey: totalProtein,
+      kCarbsKey: totalCarbs,
+      kFatsKey: totalFats,
     };
   }
 

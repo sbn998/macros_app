@@ -69,8 +69,8 @@
   "@note": {
     "description": "Sección para las macros."
   },
-  "calories": "Calorias",
-  "protein": "Proteina",
+  "calories": "Calorías",
+  "protein": "Proteína",
   "carbs": "Carbohidratos",
   "fats": "Grasas",
   "servingQuantity": "Tamaño de la porción",

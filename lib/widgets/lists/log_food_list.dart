@@ -4,7 +4,6 @@ import 'package:macros_app/functions/update_logged_food_list.dart';
 
 import 'package:macros_app/models/food_model.dart';
 import 'package:macros_app/models/logged_food_model.dart';
-import 'package:macros_app/models/logged_meal_model.dart';
 import 'package:macros_app/providers/saved_food_provider.dart';
 import 'package:macros_app/widgets/food_screen/add_food/food_selection.dart';
 

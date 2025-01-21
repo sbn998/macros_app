@@ -1,16 +1,17 @@
-# macros_app
+# About this project.
 
-A new Flutter project.
+This small app was my take on an app to track my daily macronutrients, as with most of the ones I used I didn't enjoy their UI/UX for one reason or another.
+So with that in mind, I started this project as a goal to create something which I enjoyed using daily, as well as to learn how to code using Flutter's framework.\
 
-## Getting Started
+I will keep adding features as I think of them, or I find them missing from my daily use, but for now the app is in a usable state for what my needs are.\
 
-This project is a starting point for a Flutter application.
+## Features.
 
-A few resources to get you started if this is your first Flutter project:
+    - Simple and clean UI for an easy experience.
+    - Ability to easily set up different macronutrient goals for each day of the week.
+    - Ability to drag food from one meal to another for easy editing.
+    - Supports both Spanish and English languages.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Food screen screenshot.](https://i.imgur.com/JANQAyW.png) ![Logging screen screenshot.](https://i.imgur.com/Aq7LLCE.png)
